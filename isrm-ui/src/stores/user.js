@@ -4,7 +4,8 @@ import {ref} from "vue";
 export const useUserStore = defineStore("user", () => {
     const supplier = ref({})
     const token = ref()
-    return {supplier, token}
+    const userName = ref()
+    return {supplier, token, userName}
 }, {
     persist: {
         storage: sessionStorage

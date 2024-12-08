@@ -14,6 +14,7 @@
         <module>isrm-web</module>
         <module>isrm-core-common</module>
         <module>isrm-core-idaccess</module>
+        <module>isrm-llm</module>
     </modules>
 
     <properties>

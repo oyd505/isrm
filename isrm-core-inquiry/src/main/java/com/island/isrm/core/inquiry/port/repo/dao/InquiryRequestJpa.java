@@ -2,6 +2,8 @@ package com.island.isrm.core.inquiry.port.repo.dao;
 
 import com.island.isrm.core.inquiry.port.repo.dao.dataobject.InquiryRequestDO;
 import com.island.isrm.core.inquiry.port.repo.dao.projection.InquiryRequestBasic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
@@ -13,7 +15,7 @@ public interface InquiryRequestJpa extends ListCrudRepository<InquiryRequestDO, 
 
     @Query("SELECT ir.inquiryCode as inquiryCode, ir.title as title, ir.buyerName as buyerName, ir.status as status" +
             " FROM InquiryRequestDO ir ORDER BY ir.lastModifiedDate DESC")
-    List<InquiryRequestBasic> findBasicOrderByLastModifiedDateDesc();
+    Page<InquiryRequestBasic> findBasicOrderByLastModifiedDateDesc(Pageable pageable);
 
     @Query("SELECT ir.inquiryCode as inquiryCode, ir.title as title, ir.buyerName as buyerName, ir.status as status" +
             " FROM InquiryRequestDO ir WHERE ir.status != 'PENDING'" +

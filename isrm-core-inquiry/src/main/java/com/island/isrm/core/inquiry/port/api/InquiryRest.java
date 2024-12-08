@@ -15,6 +15,8 @@ import com.island.isrm.core.inquiry.port.repo.dao.projection.InquirySupplierBasi
 import com.island.isrm.core.inquiry.port.repo.dao.projection.InquirySupplierQuote;
 import com.island.isrm.core.inquiry.port.repo.service.InquiryQueryService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,8 +37,8 @@ public class InquiryRest {
     }
 
     @GetMapping("/request/list")
-    public List<InquiryRequestBasic> list() {
-        return this.inquiryQueryService.findBasicOrderByLastModifiedDateDesc();
+    public Page<InquiryRequestBasic> list(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return this.inquiryQueryService.findBasicOrderByLastModifiedDateDesc(PageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping("/request/list/quote")

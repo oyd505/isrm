@@ -10,6 +10,8 @@ import com.island.isrm.core.inquiry.port.repo.dao.projection.InquiryProductBasic
 import com.island.isrm.core.inquiry.port.repo.dao.projection.InquiryRequestBasic;
 import com.island.isrm.core.inquiry.port.repo.dao.projection.InquirySupplierBasic;
 import com.island.isrm.core.inquiry.port.repo.dao.projection.InquirySupplierQuote;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +30,8 @@ public class InquiryQueryService {
         this.inquirySupplierJpa = inquirySupplierJpa;
     }
 
-    public List<InquiryRequestBasic> findBasicOrderByLastModifiedDateDesc() {
-        return this.inquiryRequestJpa.findBasicOrderByLastModifiedDateDesc();
+    public Page<InquiryRequestBasic> findBasicOrderByLastModifiedDateDesc(Pageable pageable) {
+        return this.inquiryRequestJpa.findBasicOrderByLastModifiedDateDesc(pageable);
     }
 
     public List<InquiryRequestBasic> findBasicForQuoteOrderByLastModifiedDateDesc(String supplierCode) {

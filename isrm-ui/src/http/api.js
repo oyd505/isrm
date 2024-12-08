@@ -38,8 +38,8 @@ export const getThinContactList = (supplierCode) =>
 
 // ------ 询价请求 ------
 // 获取询价请求列表
-export const getInquiryRequestList = () =>
-    service.get("/v1/inquiry/request/list");
+export const getInquiryRequestList = (pageNumber, pageSize) =>
+    service.get("/v1/inquiry/request/list?pageNumber=".concat(pageNumber - 1).concat("&pageSize=").concat(pageSize));
 // 获取询价请求列表-报价
 export const getInquiryRequestListForQuote = (supplierCode) =>
     service.get("/v1/inquiry/request/list/quote?supplierCode=".concat(supplierCode));
