@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @Data
 public class AddInquiryProductCmd {
     @NotBlank
-    private String inquiryCode;
-    @NotBlank
     private String code;
     @NotBlank
     private String name;

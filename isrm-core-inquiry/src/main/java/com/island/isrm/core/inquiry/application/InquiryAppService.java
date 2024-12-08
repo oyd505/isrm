@@ -22,21 +22,21 @@ public interface InquiryAppService {
 
     void publish(InquiryCode inquiryCode);
 
-    Long addProduct(@Valid AddInquiryProductCmd command);
+    Long addProduct(String inquiryCode, @Valid AddInquiryProductCmd command);
 
-    void updateProduct(@Valid UpdateInquiryProductCmd command);
+    void updateProduct(String inquiryCode, @Valid UpdateInquiryProductCmd command);
 
     void removeProduct(InquiryCode inquiryCode, InquiryProductId inquiryProductId);
 
-    Long inviteSupplier(@Valid AddInquirySupplierCmd command);
+    Long inviteSupplier(String inquiryCode, @Valid AddInquirySupplierCmd command);
 
-    Long applySupplier(@Valid ApplyInquirySupplierCmd command);
+    Long applySupplier(String inquiryCode, @Valid ApplyInquirySupplierCmd command);
 
     void auditSupplier(InquiryCode inquiryCode, InquirySupplierId inquirySupplierId);
 
     void confirmInvitation(InquiryCode inquiryCode, SupplierCode supplierCode);
 
-    void updateSupplier(@Valid UpdateInquirySupplierCmd command);
+    void updateSupplier(String inquiryCode, @Valid UpdateInquirySupplierCmd command);
 
     void removeSupplier(InquiryCode inquiryCode, InquirySupplierId inquirySupplierId);
 

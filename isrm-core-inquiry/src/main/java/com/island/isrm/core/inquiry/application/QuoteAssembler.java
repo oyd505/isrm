@@ -21,8 +21,8 @@ public class QuoteAssembler {
         return update;
     }
 
-    public QuoteItem toUpdateEntity(UpdateQuoteItemCmd command) {
-        QuoteItem update = new QuoteItem(new QuoteItemId(command.getId()), null, new QuoteCode(command.getQuoteCode()));
+    public QuoteItem toUpdateEntity(String quoteCode, UpdateQuoteItemCmd command) {
+        QuoteItem update = new QuoteItem(new QuoteItemId(command.getId()), null, new QuoteCode(quoteCode));
         update.setQuoteQuantity(new Quantity(command.getQuoteQuantity(), command.getUnits()));
         update.setPrice(new Price(command.getPrice(), command.getTaxRate()));
         update.setDeliveryDeadline(new DeliveryDeadline(command.getDeliveryDeadline()));

@@ -33,8 +33,8 @@ public class InquiryAssembler {
         return update;
     }
 
-    public InquiryProduct toAddEntity(AddInquiryProductCmd command) {
-        InquiryProduct inquiryProduct = new InquiryProduct(null, new InquiryCode(command.getInquiryCode()));
+    public InquiryProduct toAddEntity(String inquiryCode, AddInquiryProductCmd command) {
+        InquiryProduct inquiryProduct = new InquiryProduct(null, new InquiryCode(inquiryCode));
         assemble(command, inquiryProduct);
         return inquiryProduct;
     }
@@ -46,29 +46,29 @@ public class InquiryAssembler {
         target.setDeliveryDate(new DeliveryDate(source.getDeliveryDate()));
     }
 
-    public InquiryProduct toUpdateEntity(UpdateInquiryProductCmd command) {
-        InquiryProduct update = new InquiryProduct(new InquiryProductId(command.getId()), new InquiryCode(command.getInquiryCode()));
+    public InquiryProduct toUpdateEntity(String inquiryCode, UpdateInquiryProductCmd command) {
+        InquiryProduct update = new InquiryProduct(new InquiryProductId(command.getId()), new InquiryCode(inquiryCode));
         assemble(command, update);
         return update;
     }
 
-    public InquirySupplier toAddEntity(AddInquirySupplierCmd command) {
-        InquirySupplier inquirySupplier = new InquirySupplier(null, new InquiryCode(command.getInquiryCode()));
+    public InquirySupplier toAddEntity(String inquiryCode, AddInquirySupplierCmd command) {
+        InquirySupplier inquirySupplier = new InquirySupplier(null, new InquiryCode(inquiryCode));
         inquirySupplier.setSupplier(new Supplier(new SupplierCode(command.getCode()), command.getName()));
         inquirySupplier.setContact(new Contact(command.getContactName(), command.getContactPhone()));
         inquirySupplier.setAudited(Flag.valueOf(command.getAudited()));
         return inquirySupplier;
     }
 
-    public InquirySupplier toApplyEntity(ApplyInquirySupplierCmd command) {
-        InquirySupplier inquirySupplier = new InquirySupplier(null, new InquiryCode(command.getInquiryCode()));
+    public InquirySupplier toApplyEntity(String inquiryCode, ApplyInquirySupplierCmd command) {
+        InquirySupplier inquirySupplier = new InquirySupplier(null, new InquiryCode(inquiryCode));
         inquirySupplier.setSupplier(new Supplier(new SupplierCode(command.getCode()), command.getName()));
         inquirySupplier.setContact(new Contact(command.getContactName(), command.getContactPhone()));
         return inquirySupplier;
     }
 
-    public InquirySupplier toUpdateEntity(UpdateInquirySupplierCmd command) {
-        InquirySupplier inquirySupplier = new InquirySupplier(new InquirySupplierId(command.getId()), new InquiryCode(command.getInquiryCode()));
+    public InquirySupplier toUpdateEntity(String inquiryCode, UpdateInquirySupplierCmd command) {
+        InquirySupplier inquirySupplier = new InquirySupplier(new InquirySupplierId(command.getId()), new InquiryCode(inquiryCode));
         inquirySupplier.setSupplier(new Supplier(new SupplierCode(command.getCode()), command.getName()));
         inquirySupplier.setContact(new Contact(command.getContactName(), command.getContactPhone()));
         inquirySupplier.setAudited(Flag.valueOf(command.getAudited()));

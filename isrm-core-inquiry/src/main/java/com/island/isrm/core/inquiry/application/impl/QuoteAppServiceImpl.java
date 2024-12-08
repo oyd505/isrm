@@ -89,8 +89,8 @@ public class QuoteAppServiceImpl implements QuoteAppService {
 
     @Transactional
     @Override
-    public void updateItem(UpdateQuoteItemCmd command) {
-        QuoteItem input = this.quoteAssembler.toUpdateEntity(command);
+    public void updateItem(String quoteCode, UpdateQuoteItemCmd command) {
+        QuoteItem input = this.quoteAssembler.toUpdateEntity(quoteCode, command);
         QuoteRequest quoteRequest = this.quoteRequestRepository.findOneQuoteItem(
                 input.getQuoteCode(), input.getQuoteItemId()
         );

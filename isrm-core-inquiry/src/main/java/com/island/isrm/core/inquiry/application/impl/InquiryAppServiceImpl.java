@@ -69,8 +69,8 @@ public class InquiryAppServiceImpl implements InquiryAppService {
 
     @Transactional
     @Override
-    public Long addProduct(AddInquiryProductCmd command) {
-        InquiryProduct inquiryProduct = this.inquiryAssembler.toAddEntity(command);
+    public Long addProduct(String inquiryCode, AddInquiryProductCmd command) {
+        InquiryProduct inquiryProduct = this.inquiryAssembler.toAddEntity(inquiryCode, command);
         InquiryRequest inquiryRequest = this.inquiryRequestRepository.find(inquiryProduct.getInquiryCode());
         inquiryRequest.addProduct(inquiryProduct);
         return inquiryRequestRepository.addOneInquiryProduct(inquiryRequest).getId();
@@ -78,8 +78,8 @@ public class InquiryAppServiceImpl implements InquiryAppService {
 
     @Transactional
     @Override
-    public void updateProduct(UpdateInquiryProductCmd command) {
-        InquiryProduct input = this.inquiryAssembler.toUpdateEntity(command);
+    public void updateProduct(String inquiryCode, UpdateInquiryProductCmd command) {
+        InquiryProduct input = this.inquiryAssembler.toUpdateEntity(inquiryCode, command);
         InquiryRequest inquiryRequest = this.inquiryRequestRepository.findOneInquiryProduct(
                 input.getInquiryCode(), input.getInquiryProductId()
         );
@@ -99,8 +99,8 @@ public class InquiryAppServiceImpl implements InquiryAppService {
 
     @Transactional
     @Override
-    public Long inviteSupplier(AddInquirySupplierCmd command) {
-        InquirySupplier inquirySupplier = this.inquiryAssembler.toAddEntity(command);
+    public Long inviteSupplier(String inquiryCode, AddInquirySupplierCmd command) {
+        InquirySupplier inquirySupplier = this.inquiryAssembler.toAddEntity(inquiryCode, command);
         InquiryRequest inquiryRequest = this.inquiryRequestRepository.findOneInquirySupplier(
                 inquirySupplier.getInquiryCode(), inquirySupplier.getSupplier().getCode());
         inquiryRequest.inviteSupplier(inquirySupplier);
@@ -109,8 +109,8 @@ public class InquiryAppServiceImpl implements InquiryAppService {
 
     @Transactional
     @Override
-    public Long applySupplier(ApplyInquirySupplierCmd command) {
-        InquirySupplier inquirySupplier = this.inquiryAssembler.toApplyEntity(command);
+    public Long applySupplier(String inquiryCode, ApplyInquirySupplierCmd command) {
+        InquirySupplier inquirySupplier = this.inquiryAssembler.toApplyEntity(inquiryCode, command);
         InquiryRequest inquiryRequest = this.inquiryRequestRepository.findOneInquirySupplier(
                 inquirySupplier.getInquiryCode(), inquirySupplier.getSupplier().getCode()
         );
@@ -138,8 +138,8 @@ public class InquiryAppServiceImpl implements InquiryAppService {
 
     @Transactional
     @Override
-    public void updateSupplier(UpdateInquirySupplierCmd command) {
-        InquirySupplier input = this.inquiryAssembler.toUpdateEntity(command);
+    public void updateSupplier(String inquiryCode, UpdateInquirySupplierCmd command) {
+        InquirySupplier input = this.inquiryAssembler.toUpdateEntity(inquiryCode, command);
         InquiryRequest inquiryRequest = this.inquiryRequestRepository.findOneInquirySupplier(
                 input.getInquiryCode(), input.getInquirySupplierId()
         );

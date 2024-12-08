@@ -19,5 +19,5 @@ public interface QuoteAppService {
 
     void submit(QuoteCode quoteCode);
 
-    void updateItem(UpdateQuoteItemCmd command);
+    void updateItem(String quoteCode, UpdateQuoteItemCmd command);
 }

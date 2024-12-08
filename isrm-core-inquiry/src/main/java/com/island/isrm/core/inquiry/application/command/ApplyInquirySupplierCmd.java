@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 public class ApplyInquirySupplierCmd {
     @NotBlank
-    private String inquiryCode;
-    @NotBlank
     private String code;
     @NotBlank
     private String name;

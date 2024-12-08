@@ -93,13 +93,12 @@ public class InquiryRest {
     @PreAuthorize("hasRole('INQUIRY')")
     @PostMapping("/{inquiryCode}/product/save")
     public Long saveProduct(@PathVariable String inquiryCode, @RequestBody AddInquiryProductCmd addInquiryProductCmd) {
-        addInquiryProductCmd.setInquiryCode(inquiryCode);
-        return this.inquiryAppService.addProduct(addInquiryProductCmd);
+        return this.inquiryAppService.addProduct(inquiryCode, addInquiryProductCmd);
     }
 
     @PostMapping("/{inquiryCode}/product/update")
-    public void updateProduct(@RequestBody UpdateInquiryProductCmd updateInquiryProductCmd) {
-        this.inquiryAppService.updateProduct(updateInquiryProductCmd);
+    public void updateProduct(@PathVariable String inquiryCode, @RequestBody UpdateInquiryProductCmd updateInquiryProductCmd) {
+        this.inquiryAppService.updateProduct(inquiryCode, updateInquiryProductCmd);
     }
 
     @PostMapping("/{inquiryCode}/product/delete/{inquiryProductId}")
@@ -130,15 +129,13 @@ public class InquiryRest {
 
     @PostMapping("/{inquiryCode}/supplier/save")
     public Long inviteSupplier(@PathVariable String inquiryCode, @RequestBody AddInquirySupplierCmd addInquirySupplierCmd) {
-        addInquirySupplierCmd.setInquiryCode(inquiryCode);
-        return this.inquiryAppService.inviteSupplier(addInquirySupplierCmd);
+        return this.inquiryAppService.inviteSupplier(inquiryCode, addInquirySupplierCmd);
     }
 
     @PostMapping("/{inquiryCode}/supplier/apply")
     public Long applySupplier(@PathVariable String inquiryCode, @RequestBody ApplyInquirySupplierCmd applyInquirySupplierCmd) {
         // TODO 检验用户的供应商身份, 确保是供应商亲自操作
-        applyInquirySupplierCmd.setInquiryCode(inquiryCode);
-        return this.inquiryAppService.applySupplier(applyInquirySupplierCmd);
+        return this.inquiryAppService.applySupplier(inquiryCode, applyInquirySupplierCmd);
     }
 
     @PostMapping("/{inquiryCode}/supplier/confirm")
@@ -153,8 +150,8 @@ public class InquiryRest {
     }
 
     @PostMapping("/{inquiryCode}/supplier/update")
-    public void updateSupplier(@RequestBody UpdateInquirySupplierCmd updateInquirySupplierCmd) {
-        this.inquiryAppService.updateSupplier(updateInquirySupplierCmd);
+    public void updateSupplier(@PathVariable String inquiryCode, @RequestBody UpdateInquirySupplierCmd updateInquirySupplierCmd) {
+        this.inquiryAppService.updateSupplier(inquiryCode, updateInquirySupplierCmd);
     }
 
     @PostMapping("/{inquiryCode}/supplier/delete/{inquirySupplierId}")

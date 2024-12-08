@@ -14,8 +14,6 @@ public class UpdateQuoteItemCmd {
     @NotNull
     @Positive
     private Long id;
-    @NotBlank
-    private String quoteCode;
     @NotNull
     @Min(value = 1)
     private BigDecimal quoteQuantity;

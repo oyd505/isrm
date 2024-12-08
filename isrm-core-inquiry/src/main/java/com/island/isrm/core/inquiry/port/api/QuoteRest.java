@@ -70,7 +70,7 @@ public class QuoteRest {
     }
 
     @PostMapping("/{quoteCode}/item/update")
-    public void updateItem(@RequestBody UpdateQuoteItemCmd updateQuoteItemCmd) {
-        this.quoteAppService.updateItem(updateQuoteItemCmd);
+    public void updateItem(@PathVariable String quoteCode, @RequestBody UpdateQuoteItemCmd updateQuoteItemCmd) {
+        this.quoteAppService.updateItem(quoteCode, updateQuoteItemCmd);
     }
 }
