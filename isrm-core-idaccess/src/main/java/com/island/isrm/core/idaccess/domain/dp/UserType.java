@@ -6,6 +6,11 @@ public enum UserType {
         public boolean isAdmin() {
             return true;
         }
+
+        @Override
+        public boolean isExternal() {
+            return true;
+        }
     }, EMPLOYEE,
     SUPPLIER {
         @Override

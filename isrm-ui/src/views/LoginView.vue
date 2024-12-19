@@ -25,7 +25,7 @@ function handleSubmit(valid, {username, password}) {
   if (valid) {
     login(username, password).then((data) => {
       store.$patch({
-        supplier: data.supplier,
+        supplier: data.userSupplier,
         token: data.token,
         userName: data.userName
       });
