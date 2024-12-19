@@ -96,6 +96,7 @@ function initInquirySupplierQuoteList() {
         <Button type="primary" :to="`/main/inquiry/product/list/${inquiryCode}`">商品</Button>
         <Button type="primary" :to="`/main/inquiry/supplier/list/${inquiryCode}`">供应商</Button>
         <Button type="primary">协作小组</Button>
+        <Button type="primary" to="/main/inquiry/request/list">返回</Button>
       </ButtonGroup>
       <ButtonGroup v-if="inquiryCode !== 'undefined'">
         <Button type="info" v-show="inquiry.status === 'PENDING'" @click="submit">提交</Button>
@@ -121,7 +122,7 @@ function initInquirySupplierQuoteList() {
     </Col>
   </Row>
 
-  <Drawer title="询价供应商报价监控" placement="bottom" :closable="false" v-model="supplierQuoteDrawer">
+  <Drawer title="询价供应商报价监控" placement="bottom" :closable="false" v-model="supplierQuoteDrawer" height="60">
     <InquirySupplierQuoteTable :loading="supplierQuoteLoading" :supplierQuoteList="supplierQuoteList"/>
   </Drawer>
 </template>
