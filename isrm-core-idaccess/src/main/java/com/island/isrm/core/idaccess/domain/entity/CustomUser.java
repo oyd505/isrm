@@ -3,7 +3,7 @@ package com.island.isrm.core.idaccess.domain.entity;
 import com.island.isrm.core.common.domain.BaseEntity;
 import com.island.isrm.core.common.domain.dp.Name;
 import com.island.isrm.core.common.domain.dp.Password;
-import com.island.isrm.core.idaccess.domain.dp.Supplier;
+import com.island.isrm.core.idaccess.domain.dp.UserSupplier;
 import com.island.isrm.core.idaccess.domain.dp.UserCode;
 import com.island.isrm.core.idaccess.domain.dp.UserType;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ public class CustomUser extends BaseEntity {
     private final Password password;
     private final UserType userType;
     @Setter
-    private Supplier supplier;
+    private UserSupplier userSupplier;
 
     public CustomUser(UserCode userCode, Name name, Password password, UserType userType) {
         this.userCode = userCode;

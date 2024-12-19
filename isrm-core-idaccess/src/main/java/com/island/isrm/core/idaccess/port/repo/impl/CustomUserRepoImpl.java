@@ -3,7 +3,7 @@ package com.island.isrm.core.idaccess.port.repo.impl;
 import com.island.isrm.core.common.domain.dp.Name;
 import com.island.isrm.core.common.domain.dp.Password;
 import com.island.isrm.core.common.exception.DataNotFoundException;
-import com.island.isrm.core.idaccess.domain.dp.Supplier;
+import com.island.isrm.core.idaccess.domain.dp.UserSupplier;
 import com.island.isrm.core.idaccess.domain.dp.UserCode;
 import com.island.isrm.core.idaccess.domain.dp.UserType;
 import com.island.isrm.core.idaccess.domain.entity.CustomUser;
@@ -27,11 +27,11 @@ public class CustomUserRepoImpl implements CustomUserRepository {
         userMap.put(e1.getUserCode(), e1);
         CustomUser s1 = new CustomUser(new UserCode("S1000"), new Name("华润供应商有限公司"),
                 new Password("{bcrypt}$2a$10$D3m5GZ2Uoaz2sP4/EwI3dOQ98fB8hbwxQBnQ0egiw.EUUEq0pGcAO"), UserType.SUPPLIER);
-        s1.setSupplier(new Supplier("S1000", "华润供应商有限公司"));
+        s1.setUserSupplier(new UserSupplier("S1000", "华润供应商有限公司"));
         userMap.put(s1.getUserCode(), s1);
         CustomUser s2 = new CustomUser(new UserCode("S1001"), new Name("鑫源供应商有限公司"),
                 new Password("{bcrypt}$2a$10$D3m5GZ2Uoaz2sP4/EwI3dOQ98fB8hbwxQBnQ0egiw.EUUEq0pGcAO"), UserType.SUPPLIER);
-        s2.setSupplier(new Supplier("S1001", "鑫源供应商有限公司"));
+        s2.setUserSupplier(new UserSupplier("S1001", "鑫源供应商有限公司"));
         userMap.put(s2.getUserCode(), s2);
     }
 

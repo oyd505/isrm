@@ -20,7 +20,7 @@ public class UserQueryService {
         loginUser.setUserCode(userCode);
         loginUser.setUserName(customUser.getName().getValue());
         loginUser.setUserType(customUser.getUserType().name());
-        loginUser.setSupplier(customUser.getSupplier());
+        loginUser.setUserSupplier(customUser.getUserSupplier());
         return loginUser;
     }
 }
