@@ -10,10 +10,11 @@
     <name>isrm-parent</name>
     <url>http://maven.apache.org</url>
     <modules>
-        <module>isrm-core-inquiry</module>
-        <module>isrm-web</module>
         <module>isrm-core-common</module>
         <module>isrm-core-idaccess</module>
+        <module>isrm-core-supplier</module>
+        <module>isrm-core-inquiry</module>
+        <module>isrm-web</module>
         <module>isrm-llm</module>
     </modules>
 

@@ -10,6 +10,20 @@ const router = createRouter({
             component: () => import("@/views/MainView.vue"),
             children: [
                 {path: "home", component: () => import("@/views/HomeView.vue")},
+                // ------ 供应商 ------
+                {
+                    path: "supplier/list",
+                    name: "supplier",
+                    component: () => import("@/views/supplier/ListView.vue"),
+                },
+                {
+                    path: "supplier/edit/:supplierCode",
+                    component: () => import("@/views/supplier/EditView.vue"),
+                },
+                {
+                    path: "supplier/contact/list/:supplierCode",
+                    component: () => import("@/views/supplier/contact/ListEditView.vue"),
+                },
                 // ------ 询价 ------
                 {
                     path: "inquiry/request/list",

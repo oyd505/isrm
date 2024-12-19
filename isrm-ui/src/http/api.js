@@ -29,12 +29,57 @@ export const getThinProductList = () =>
     service.get("/v1/product/list/code/name");
 
 // ------ 供应商 ------
+// 获取供应商列表
+export const getSupplierList = (pageNumber, pageSize) =>
+    service.get("/v1/supplier/page/basic?pageNumber=".concat(pageNumber - 1).concat("&pageSize=").concat(pageSize));
 // 获取精简供应商列表
 export const getThinSupplierList = () =>
     service.get("/v1/supplier/list/code/name");
+// 获取供应商详情
+export const getSupplier = (supplierCode) =>
+    service.get("/v1/supplier/".concat(supplierCode));
+// 创建供应商
+export const saveSupplier = (supplier) =>
+    service.post("/v1/supplier/create", supplier);
+// 更新供应商信息
+export const updateSupplier = (supplier) =>
+    service.post("/v1/supplier/update", supplier);
+// 删除供应商
+export const delSupplier = (supplierCode) =>
+    service.post("/v1/supplier/remove/".concat(supplierCode));
+
+// ------ 供应商联系人 ------
+// 获取供应商联系人列表
+export const getSupplierContactList = (supplierCode) =>
+    service.get("/v1/supplier/".concat(supplierCode).concat("/contact/list"));
 // 获取供应商联系人列表
 export const getThinContactList = (supplierCode) =>
     service.get("/v1/supplier/".concat(supplierCode).concat("/contact/list/name/phone"));
+// 获取供应商联系人详情
+export const getSupplierContact = (supplierCode, supplierContactId) =>
+    service.get(
+        "/v1/supplier/".concat(supplierCode).concat("/contact/").concat(supplierContactId)
+    );
+// 新增供应商联系人
+export const saveSupplierContact = (supplierCode, product) =>
+    service.post(
+        "/v1/supplier/".concat(supplierCode).concat("/contact/add"),
+        product
+    );
+// 更新供应商联系人信息
+export const updateSupplierContact = (supplierCode, product) =>
+    service.post(
+        "/v1/supplier/".concat(supplierCode).concat("/contact/update"),
+        product
+    );
+// 删除供应商联系人
+export const delSupplierContact = (supplierCode, supplierContactId) =>
+    service.post(
+        "/v1/supplier/"
+            .concat(supplierCode)
+            .concat("/contact/remove/")
+            .concat(supplierContactId)
+    );
 
 // ------ 询价请求 ------
 // 获取询价请求列表

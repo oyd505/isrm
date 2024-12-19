@@ -15,21 +15,25 @@ const isCollapsed = ref(false);
           <Icon type="ios-paper"/>
           主页
         </MenuItem>
-        <MenuItem name="2" to="/main/inquiry/request/list">
+        <MenuItem name="2" to="/main/supplier/list">
+          <Icon type="ios-people"/>
+          供应商
+        </MenuItem>
+        <MenuItem name="3" to="/main/inquiry/request/list">
           <Icon type="ios-people"/>
           询价
         </MenuItem>
-        <MenuItem name="3" to="/main/inquiry/quote/list/inquiry">
-          <Icon type="ios-people"/>
+        <MenuItem name="4" to="/main/inquiry/quote/list/inquiry">
+          <Icon type="ios-pricetags"/>
           报价
         </MenuItem>
-        <MenuItem name="4" to="/">
-          <Icon type="ios-people"/>
+        <MenuItem name="5" to="/">
+          <Icon type="ios-log-out"/>
           登出
         </MenuItem>
       </Menu>
     </Sider>
-    <Content :style="{margin: '5px', background: '#fff', minHeight: '520px'}">
+    <Content style="background: #fff">
       <RouterView/>
     </Content>
   </Layout>

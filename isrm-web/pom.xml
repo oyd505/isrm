@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>com.island.isrm</groupId>
+            <artifactId>isrm-core-supplier</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.island.isrm</groupId>
             <artifactId>isrm-core-inquiry</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
