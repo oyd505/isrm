@@ -2,13 +2,12 @@
 import {Col, Form, FormItem, Input, Row, Select} from "view-ui-plus";
 
 const props = defineProps({
-  supplier: {type: Object, required: true},
-  disabled: {type: Boolean}
+  supplier: {type: Object, required: true}
 });
 </script>
 
 <template>
-  <Form :model="supplier" label-position="top" :disabled="disabled">
+  <Form :model="supplier" label-position="top">
     <Row>
       <Col span="8">
         <FormItem label="编码">

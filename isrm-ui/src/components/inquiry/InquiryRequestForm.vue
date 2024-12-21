@@ -1,35 +1,16 @@
 <script setup>
-import {onMounted, ref} from "vue";
-import {getThinEmployeeList, getThinPurOrganizationList} from "@/http/api"
-import {Col, Form, FormItem, Input, Row, Select} from "view-ui-plus";
+import {Col, DatePicker, Form, FormItem, Input, Row, Select} from "view-ui-plus";
 import CurrencySelect from "@/components/common/CurrencySelect.vue";
+import EmployeeSelect from "@/components/common/EmployeeSelect.vue";
+import OrganizationSelect from "@/components/common/OrganizationSelect.vue";
 
 const props = defineProps({
-  inquiry: {type: Object, required: true},
-  disabled: {type: Boolean}
+  inquiry: {type: Object, required: true}
 });
-const employeeList = ref([])
-const organizationList = ref([])
-onMounted(() => {
-  getThinEmployeeList().then(data => {
-    employeeList.value = data;
-  })
-  getThinPurOrganizationList().then(data => {
-    organizationList.value = data;
-  })
-})
-
-function selectBuyer(selection) {
-  props.inquiry.buyerName = selection.label;
-}
-
-function selectOrganization(selection) {
-  props.inquiry.purOrgName = selection.label;
-}
 </script>
 
 <template>
-  <Form :model="inquiry" label-position="top" :disabled="disabled">
+  <Form :model="inquiry" label-position="top">
     <Row>
       <Col span="8">
         <FormItem label="编码">
@@ -66,9 +47,7 @@ function selectOrganization(selection) {
       </Col>
       <Col span="8">
         <FormItem label="采购组织">
-          <Select v-model="inquiry.purOrgCode" @on-select="selectOrganization" filterable>
-            <Option v-for="item in organizationList" :value="item.code" :key="item.code">{{ item.name }}</Option>
-          </Select>
+          <OrganizationSelect orgType="po" v-model:code="inquiry.purOrgCode" v-model:name="inquiry.purOrgName"/>
         </FormItem>
       </Col>
     </Row>
@@ -85,9 +64,7 @@ function selectOrganization(selection) {
       </Col>
       <Col span="8">
         <FormItem label="采购员">
-          <Select v-model="inquiry.buyerCode" @on-select="selectBuyer" filterable>
-            <Option v-for="item in employeeList" :value="item.code" :key="item.code">{{ item.name }}</Option>
-          </Select>
+          <EmployeeSelect v-model:code="inquiry.buyerCode" v-model:name="inquiry.buyerName"/>
         </FormItem>
       </Col>
     </Row>

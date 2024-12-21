@@ -1,14 +1,17 @@
 <script setup>
-import {Button, ButtonGroup, Card, Col, FormItem, Icon, Message, PageHeader, Row} from "view-ui-plus";
+import {Button, ButtonGroup, Card, Col, FormItem, Icon, Message, Modal, PageHeader, Row} from "view-ui-plus";
 import UserForm from "@/components/user/UserForm.vue";
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
-import {getUser, saveUser, updateUser} from "@/http/api";
+import {disableUser, enableUser, getUser, saveUser, updateRoles, updateUser} from "@/http/api";
+import UserRoleSelect from "@/components/user/UserRoleSelect.vue";
 
 const route = useRoute();
 const router = useRouter();
 const userName = ref(route.params.userName);
 const user = ref({});
+const userRolesModel = ref(false);
+const userRoles = ref([]);
 
 onMounted(() => {
   initUser();
@@ -43,6 +46,28 @@ function handleReset() {
   user.value.supplierCode = null;
   user.value.supplierName = null;
 }
+
+function disable() {
+  disableUser(userName.value).then(() => {
+    Message.info("禁用成功");
+    initUser();
+  });
+}
+
+function enable() {
+  enableUser(userName.value).then(() => {
+    Message.info("启用成功");
+    initUser();
+  });
+}
+
+function updateUserRoles() {
+  updateRoles(userName.value, userRoles.value).then(() => {
+    Message.info("设置角色成功");
+    userRolesModel.value = false;
+    initUser();
+  })
+}
 </script>
 
 <template>
@@ -51,6 +76,11 @@ function handleReset() {
     <template #action>
       <ButtonGroup>
         <Button type="primary" to="/main/user/list">返回</Button>
+      </ButtonGroup>
+      <ButtonGroup v-if="userName !== 'undefined'">
+        <Button type="info" v-show="user.disabled" @click="enable">启用</Button>
+        <Button type="info" v-show="!user.disabled" @click="disable">禁用</Button>
+        <Button type="info" v-show="!user.disabled" @click="userRolesModel = true">角色</Button>
       </ButtonGroup>
     </template>
   </PageHeader>
@@ -70,6 +100,10 @@ function handleReset() {
       </Card>
     </Col>
   </Row>
+
+  <Modal v-model="userRolesModel" title="用户角色配置" @on-ok="updateUserRoles">
+    <UserRoleSelect :roles="user.roles" @update-event="userRoles=$event"/>
+  </Modal>
 </template>
 
 <style scoped>

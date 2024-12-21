@@ -2,8 +2,7 @@
 import {Button, Col, Form, FormItem, Input, Row} from "view-ui-plus";
 
 const props = defineProps({
-  contact: {type: Object, required: true},
-  disabled: {type: Boolean}
+  contact: {type: Object, required: true}
 });
 
 defineEmits(["updateEvent"]);
@@ -15,7 +14,7 @@ function handleReset() {
 </script>
 
 <template>
-  <Form :model="contact" label-position="top" :disabled="disabled">
+  <Form :model="contact" label-position="top">
     <Row>
       <Col span="12">
         <FormItem label="名称">

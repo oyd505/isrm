@@ -8,7 +8,7 @@ import {useRouter} from "vue-router";
 const loading = ref(true);
 const requestList = ref([]);
 const pageTotal = ref(0);
-const pageSize = ref(2);
+const pageSize = ref(20);
 
 
 onMounted(() => {

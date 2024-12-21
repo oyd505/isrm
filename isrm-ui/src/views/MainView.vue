@@ -20,7 +20,7 @@ const isCollapsed = ref(false);
           用户
         </MenuItem>
         <MenuItem name="2" to="/main/supplier/list">
-          <Icon type="ios-business"/>
+          <Icon type="ios-subway"/>
           供应商
         </MenuItem>
         <MenuItem name="3" to="/main/inquiry/request/list">

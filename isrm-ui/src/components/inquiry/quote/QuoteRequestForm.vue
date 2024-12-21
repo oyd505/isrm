@@ -3,13 +3,12 @@ import {Col, Form, FormItem, Input, InputNumber, Row, Select} from "view-ui-plus
 import CurrencySelect from "@/components/common/CurrencySelect.vue";
 
 const props = defineProps({
-  quote: {type: Object, required: true},
-  disabled: {type: Boolean}
+  quote: {type: Object, required: true}
 });
 </script>
 
 <template>
-  <Form :model="quote" label-position="top" :disabled="disabled">
+  <Form :model="quote" label-position="top">
     <Row>
       <Col span="8">
         <FormItem label="编码">

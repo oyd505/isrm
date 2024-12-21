@@ -2,8 +2,7 @@
 import {computed} from "vue";
 
 const props = defineProps({
-  roles: {type: String},
-  disabled: {type: Boolean}
+  roles: {type: String}
 });
 
 const emit = defineEmits(["updateEvent"]);
@@ -23,13 +22,13 @@ const roleArray = computed({
     return props.roles.split(',').map(s => s.trim());
   },
   set(newValue) {
-    emit('updateEvent', newValue.join(','))
+    emit('updateEvent', newValue)
   }
 });
 </script>
 
 <template>
-  <Select v-model="roleArray" :disabled="disabled" multiple>
+  <Select v-model="roleArray" multiple>
     <Option v-for="item in roleList" :value="item.value" :key="item.value">{{ item.label }}</Option>
   </Select>
 </template>

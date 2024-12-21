@@ -1,30 +1,22 @@
 <script setup>
 import {Button, Col, DatePicker, Form, FormItem, Input, InputNumber, Option, Row, Select} from "view-ui-plus";
 import {onMounted, ref} from "vue";
-import {getThinFtyOrganizationList, getThinProductList} from "@/http/api";
+import {getThinProductList} from "@/http/api";
+import OrganizationSelect from "@/components/common/OrganizationSelect.vue";
 
 const props = defineProps({
-  product: {type: Object, required: true},
-  disabled: {type: Boolean}
+  product: {type: Object, required: true}
 });
 defineEmits(["updateEvent"]);
 const thinProductList = ref([])
-const organizationList = ref([])
 onMounted(() => {
   getThinProductList().then(data => {
     thinProductList.value = data;
-  })
-  getThinFtyOrganizationList().then(data => {
-    organizationList.value = data;
   })
 })
 
 function selectProduct(selection) {
   props.product.code = selection.tag;
-}
-
-function selectOrganization(selection) {
-  props.product.factoryName = selection.label;
 }
 
 function handleReset() {
@@ -35,7 +27,7 @@ function handleReset() {
 </script>
 
 <template>
-  <Form :model="product" label-position="top" :disabled="disabled">
+  <Form :model="product" label-position="top">
     <Row>
       <Col span="16">
         <FormItem label="名称">
@@ -48,10 +40,8 @@ function handleReset() {
         </FormItem>
       </Col>
       <Col span="8">
-        <FormItem label="采购组织">
-          <Select v-model="product.factoryCode" @on-select="selectOrganization" filterable>
-            <Option v-for="item in organizationList" :value="item.code" :key="item.code">{{ item.name }}</Option>
-          </Select>
+        <FormItem label="工厂">
+          <OrganizationSelect orgType="fo" v-model:code="product.factoryCode" v-model:name="product.factoryName"/>
         </FormItem>
       </Col>
     </Row>

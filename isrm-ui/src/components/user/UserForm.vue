@@ -1,38 +1,27 @@
 <script setup>
 import {Col, Form, FormItem, Input, Option, Row, Select, Switch} from "view-ui-plus";
 import UserRoleSelect from "@/components/user/UserRoleSelect.vue";
-import {onMounted, ref} from "vue";
-import {getThinEmployeeList, getThinSupplierList} from "@/http/api";
+import SupplierSelect from "@/components/supplier/SupplierSelect.vue";
+import EmployeeSelect from "@/components/common/EmployeeSelect.vue";
 
 const props = defineProps({
-  user: {type: Object, required: true},
-  disabled: {type: Boolean}
+  user: {type: Object, required: true}
 });
 
-const employeeList = ref([])
-const supplierList = ref([])
-
-onMounted(() => {
-  getThinEmployeeList().then(data => {
-    employeeList.value = data
-  })
-  getThinSupplierList().then(data => {
-    supplierList.value = data;
-  })
-});
-
-function selectEmployee(selection) {
-  props.user.employeeName = selection.label;
-  console.log(selection)
+function selectUserType() {
+  props.user.employeeCode = "";
+  props.user.employeeName = "";
+  props.user.supplierCode = "";
+  props.user.supplierName = "";
 }
 
-function selectSupplier(selection) {
-  props.user.supplierName = selection.label;
+function selectAndSetNickname(selection) {
+  props.user.nickname = selection.label;
 }
 </script>
 
 <template>
-  <Form :model="user" label-position="top" :disabled="disabled">
+  <Form :model="user" label-position="top">
     <Row>
       <Col span="8">
         <FormItem label="用户名">
@@ -41,14 +30,14 @@ function selectSupplier(selection) {
       </Col>
       <Col span="16">
         <FormItem label="昵称">
-          <Input v-model="user.nickname"/>
+          <Input v-model="user.nickname" :disabled="user.userType !== 'ADMIN'"/>
         </FormItem>
       </Col>
     </Row>
     <Row>
       <Col span="8">
         <FormItem label="用户类型">
-          <Select v-model="user.userType">
+          <Select v-model="user.userType" @on-select="selectUserType">
             <Option value="EMPLOYEE">内部员工</Option>
             <Option value="SUPPLIER">供应商</Option>
             <Option value="ADMIN">管理员</Option>
@@ -57,23 +46,21 @@ function selectSupplier(selection) {
       </Col>
       <Col span="16">
         <FormItem label="用户角色">
-          <UserRoleSelect :roles="user.roles" @update-event="user.roles=$event" disabled/>
+          <UserRoleSelect :roles="user.roles" disabled/>
         </FormItem>
       </Col>
     </Row>
     <Row>
       <Col span="8">
         <FormItem label="关联员工">
-          <Select v-model="user.employeeCode" @on-select="selectEmployee" label-in-value filterable>
-            <Option v-for="item in employeeList" :value="item.code" :key="item.code">{{ item.name }}</Option>
-          </Select>
+          <EmployeeSelect v-model:code="user.employeeCode" v-model:name="user.employeeName"
+                          @on-select="selectAndSetNickname" :disabled="user.userType === 'SUPPLIER'"/>
         </FormItem>
       </Col>
       <Col span="8">
         <FormItem label="所属供应商">
-          <Select v-model="user.supplierCode" @on-select="selectSupplier" label-in-value filterable>
-            <Option v-for="item in supplierList" :value="item.code" :key="item.code">{{ item.name }}</Option>
-          </Select>
+          <SupplierSelect v-model:code="user.supplierCode" v-model:name="user.supplierName"
+                          @on-select="selectAndSetNickname" :disabled="user.userType === 'EMPLOYEE'"/>
         </FormItem>
       </Col>
       <Col span="4">

@@ -20,6 +20,15 @@ export const saveUser = (user) =>
 // 更新用户信息
 export const updateUser = (user) =>
     service.post("/v1/user/update", user);
+// 设置角色
+export const updateRoles = (userName, roles) =>
+    service.post("/v1/user/update/".concat(userName).concat("/roles"), roles);
+// 禁用用户
+export const disableUser = (userName) =>
+    service.post("/v1/user/disable/".concat(userName));
+// 启用用户
+export const enableUser = (userName) =>
+    service.post("/v1/user/enable/".concat(userName));
 // 删除用户
 export const delUser = (userName) =>
     service.post("/v1/user/remove/".concat(userName));

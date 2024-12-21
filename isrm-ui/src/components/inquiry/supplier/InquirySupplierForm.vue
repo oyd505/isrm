@@ -1,14 +1,13 @@
 <script setup>
 import {Button, Checkbox, Col, Form, FormItem, Option, Row, Select} from "view-ui-plus";
-import {onMounted, ref, watch} from "vue";
-import {getThinContactList, getThinSupplierList} from "@/http/api";
+import {ref, watch} from "vue";
+import {getThinContactList} from "@/http/api";
+import SupplierSelect from "@/components/supplier/SupplierSelect.vue";
 
 const props = defineProps({
-  supplier: {type: Object, required: true},
-  disabled: {type: Boolean}
+  supplier: {type: Object, required: true}
 });
 defineEmits(["updateEvent"]);
-const thinSupplierList = ref([])
 const contactList = ref([])
 watch(() => props.supplier.code, (newCode) => {
   if (newCode) {
@@ -19,14 +18,8 @@ watch(() => props.supplier.code, (newCode) => {
     })
   }
 })
-onMounted(() => {
-  getThinSupplierList().then(data => {
-    thinSupplierList.value = data;
-  })
-})
 
-function selectSupplier(selection) {
-  props.supplier.code = selection.tag;
+function selectSupplier() {
   props.supplier.contactName = null;
   props.supplier.contactPhone = null;
 }
@@ -44,16 +37,11 @@ function handleReset() {
 </script>
 
 <template>
-  <Form :model="supplier" label-position="top" :disabled="disabled">
+  <Form :model="supplier" label-position="top">
     <Row>
       <Col span="18">
         <FormItem label="名称">
-          <Select v-model="supplier.name" @on-select="selectSupplier" filterable>
-            <Option v-for="item in thinSupplierList" :value="item.name" :tag="item.code" :key="item.code">{{
-                item.name
-              }}
-            </Option>
-          </Select>
+          <SupplierSelect v-model:code="supplier.code" v-model:name="supplier.name" @on-select="selectSupplier"/>
         </FormItem>
       </Col>
       <Col span="5" offset="1">
