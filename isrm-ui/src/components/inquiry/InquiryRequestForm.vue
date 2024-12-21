@@ -3,6 +3,7 @@ import {Col, DatePicker, Form, FormItem, Input, Row, Select} from "view-ui-plus"
 import CurrencySelect from "@/components/common/CurrencySelect.vue";
 import EmployeeSelect from "@/components/common/EmployeeSelect.vue";
 import OrganizationSelect from "@/components/common/OrganizationSelect.vue";
+import InquiryStatusSelect from "@/components/inquiry/InquiryStatusSelect.vue";
 
 const props = defineProps({
   inquiry: {type: Object, required: true}
@@ -19,15 +20,7 @@ const props = defineProps({
       </Col>
       <Col span="8">
         <FormItem label="状态">
-          <Select v-model="inquiry.status" disabled>
-            <Option value="PENDING">未提交状态</Option>
-            <Option value="SUBMITTED">已提交状态</Option>
-            <Option value="PUBLISHED">已发布状态</Option>
-            <Option value="CONFIRMED">已确认状态</Option>
-            <Option value="PAID_PENDING">已确认待付款状态</Option>
-            <Option value="PAID">已付款状态</Option>
-            <Option value="CANCELED">已取消状态</Option>
-          </Select>
+          <InquiryStatusSelect v-model="inquiry.status" disabled/>
         </FormItem>
       </Col>
       <Col span="8">

@@ -1,6 +1,6 @@
 <script setup>
 import {Table} from "view-ui-plus";
-import SupplierStatusSpan from "@/components/supplier/SupplierStatusSpan.vue";
+import SupplierStatusSelect from "@/components/supplier/SupplierStatusSelect.vue";
 
 const columns = [
   {title: "序号", type: "index", width: 80},
@@ -35,7 +35,7 @@ defineProps({
       <strong>{{ row.name }}</strong>
     </template>
     <template #supplierStatus="{ row }">
-      <SupplierStatusSpan :status="row.supplierStatus"/>
+      <SupplierStatusSelect v-model="row.supplierStatus" comp-type="span"/>
     </template>
     <template #action="{ row, index }">
       <slot :row="row" :index="index"></slot>

@@ -1,6 +1,6 @@
 <script setup>
 import {Table} from "view-ui-plus";
-import QuoteStatusSpan from "@/components/inquiry/quote/QuoteStatusSpan.vue";
+import QuoteStatusSelect from "@/components/inquiry/quote/QuoteStatusSelect.vue";
 
 const columns = [
   {title: "序号", type: "index", width: 80},
@@ -36,7 +36,7 @@ defineProps({
 <template>
   <Table :loading="loading" stripe :columns="columns" :data="requestList">
     <template #status="{ row }">
-      <QuoteStatusSpan :status="row.status"/>
+      <QuoteStatusSelect v-model="row.status" comp-type="span"/>
     </template>
     <template #action="{ row, index }">
       <slot :row="row" :index="index"></slot>

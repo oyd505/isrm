@@ -1,6 +1,6 @@
 <script setup>
 import {Switch, Table} from "view-ui-plus";
-import UserTypeSpan from "@/components/user/UserTypeSpan.vue";
+import UserTypeSelect from "@/components/user/UserTypeSelect.vue";
 import UserRoleSelect from "@/components/user/UserRoleSelect.vue";
 
 const columns = [
@@ -56,7 +56,7 @@ defineProps({
       <strong>{{ row.userName }}</strong>
     </template>
     <template #userType="{ row }">
-      <UserTypeSpan :userType="row.userType"/>
+      <UserTypeSelect v-model="row.userType" comp-type="span"/>
     </template>
     <template #roles="{ row }">
       <UserRoleSelect :roles="row.roles" :disabled="true"/>

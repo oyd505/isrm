@@ -1,7 +1,7 @@
 <script setup>
 
 import {Button, ButtonGroup, Description, DescriptionList, PageHeader} from "view-ui-plus";
-import InquiryStatusSpan from "@/components/inquiry/InquiryStatusSpan.vue";
+import InquiryStatusSelect from "@/components/inquiry/InquiryStatusSelect.vue";
 
 defineProps({
   inquiryCode: {type: String, required: true},
@@ -26,7 +26,7 @@ defineProps({
     <template #extra>
       <p style="color: #808695">状态</p>
       <p style="font-size: 18px">
-        <InquiryStatusSpan :status="inquiry.status"/>
+        <InquiryStatusSelect v-model="inquiry.status" comp-type="span"/>
       </p>
     </template>
   </PageHeader>

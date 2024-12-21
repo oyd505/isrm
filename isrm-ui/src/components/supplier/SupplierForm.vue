@@ -1,5 +1,6 @@
 <script setup>
-import {Col, Form, FormItem, Input, Row, Select} from "view-ui-plus";
+import {Col, Form, FormItem, Input, Row} from "view-ui-plus";
+import SupplierStatusSelect from "@/components/supplier/SupplierStatusSelect.vue";
 
 const props = defineProps({
   supplier: {type: Object, required: true}
@@ -23,12 +24,7 @@ const props = defineProps({
     <Row>
       <Col span="8">
         <FormItem label="状态">
-          <Select v-model="supplier.supplierStatus" disabled>
-            <Option value="POTENTIAL">潜在</Option>
-            <Option value="INTRODUCING">引入中</Option>
-            <Option value="QUALIFIED">合格</Option>
-            <Option value="EXITED">已退出</Option>
-          </Select>
+          <SupplierStatusSelect v-model="supplier.supplierStatus" disabled/>
         </FormItem>
       </Col>
     </Row>

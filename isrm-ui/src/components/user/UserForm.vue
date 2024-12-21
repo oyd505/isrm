@@ -1,8 +1,9 @@
 <script setup>
-import {Col, Form, FormItem, Input, Option, Row, Select, Switch} from "view-ui-plus";
+import {Col, Form, FormItem, Input, Row, Switch} from "view-ui-plus";
 import UserRoleSelect from "@/components/user/UserRoleSelect.vue";
 import SupplierSelect from "@/components/supplier/SupplierSelect.vue";
 import EmployeeSelect from "@/components/common/EmployeeSelect.vue";
+import UserTypeSelect from "@/components/user/UserTypeSelect.vue";
 
 const props = defineProps({
   user: {type: Object, required: true}
@@ -37,11 +38,7 @@ function selectAndSetNickname(selection) {
     <Row>
       <Col span="8">
         <FormItem label="用户类型">
-          <Select v-model="user.userType" @on-select="selectUserType">
-            <Option value="EMPLOYEE">内部员工</Option>
-            <Option value="SUPPLIER">供应商</Option>
-            <Option value="ADMIN">管理员</Option>
-          </Select>
+          <UserTypeSelect v-model="user.userType" @on-select="selectUserType"/>
         </FormItem>
       </Col>
       <Col span="16">

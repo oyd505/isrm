@@ -1,6 +1,6 @@
 <script setup>
 import {Button, ButtonGroup, Description, DescriptionList, PageHeader} from "view-ui-plus";
-import SupplierStatusSpan from "@/components/supplier/SupplierStatusSpan.vue";
+import SupplierStatusSelect from "@/components/supplier/SupplierStatusSelect.vue";
 
 defineProps({
   supplierCode: {type: String, required: true},
@@ -25,7 +25,7 @@ defineProps({
     <template #extra>
       <p style="color: #808695">状态</p>
       <p style="font-size: 18px">
-        <SupplierStatusSpan :status="supplier.supplierStatus"/>
+        <SupplierStatusSelect v-model="supplier.supplierStatus" comp-type="span"/>
       </p>
     </template>
   </PageHeader>

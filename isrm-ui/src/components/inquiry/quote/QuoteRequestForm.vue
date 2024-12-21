@@ -1,6 +1,7 @@
 <script setup>
-import {Col, Form, FormItem, Input, InputNumber, Row, Select} from "view-ui-plus";
+import {Col, Form, FormItem, Input, InputNumber, Row} from "view-ui-plus";
 import CurrencySelect from "@/components/common/CurrencySelect.vue";
+import QuoteStatusSelect from "@/components/inquiry/quote/QuoteStatusSelect.vue";
 
 const props = defineProps({
   quote: {type: Object, required: true}
@@ -17,11 +18,7 @@ const props = defineProps({
       </Col>
       <Col span="8">
         <FormItem label="状态">
-          <Select v-model="quote.status" disabled>
-            <Option value="PENDING">未提交状态</Option>
-            <Option value="SUBMITTED">已提交状态</Option>
-            <Option value="CANCELED">已取消状态</Option>
-          </Select>
+          <QuoteStatusSelect v-model="quote.status" disabled/>
         </FormItem>
       </Col>
       <FormItem label="询价编码">

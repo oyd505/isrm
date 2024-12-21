@@ -1,6 +1,6 @@
 <script setup>
 import {Table} from "view-ui-plus";
-import InquiryStatusSpan from "@/components/inquiry/InquiryStatusSpan.vue";
+import InquiryStatusSelect from "@/components/inquiry/InquiryStatusSelect.vue";
 
 const columns = [
   {title: "序号", type: "index", width: 80},
@@ -39,7 +39,7 @@ defineProps({
       <strong>{{ row.title }}</strong>
     </template>
     <template #status="{ row }">
-      <InquiryStatusSpan :status="row.status"/>
+      <InquiryStatusSelect v-model="row.status" comp-type="span"/>
     </template>
     <template #action="{ row, index }">
       <slot :row="row" :index="index"></slot>
