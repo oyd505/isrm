@@ -2,11 +2,27 @@ package com.island.isrm.core.idaccess.domain.dp;
 
 public enum UserRole {
     /**
-     * 询价
+     * 采购员
      */
-    INQUIRY,
+    BUYER,
     /**
-     * 报价
+     * 经理
      */
-    QUOTE;
+    MANAGER,
+    /**
+     * 品质管理员
+     */
+    QUALITY,
+    /**
+     * 供应商
+     */
+    VENDOR,
+    /**
+     * 管理员
+     */
+    ADMIN,
+    /**
+     * 访客
+     */
+    GUEST;
 }

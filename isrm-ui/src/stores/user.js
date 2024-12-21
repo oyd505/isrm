@@ -5,7 +5,8 @@ export const useUserStore = defineStore("user", () => {
     const supplier = ref({})
     const token = ref()
     const userName = ref()
-    return {supplier, token, userName}
+    const nickname = ref()
+    return {supplier, token, userName, nickname}
 }, {
     persist: {
         storage: sessionStorage

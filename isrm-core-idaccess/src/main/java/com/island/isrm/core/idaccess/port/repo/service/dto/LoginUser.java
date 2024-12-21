@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class LoginUser {
     private String token;
-    private String userCode;
     private String userName;
     private String userType;
+    private String nickname;
     private UserSupplier userSupplier;
 }

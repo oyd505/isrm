@@ -37,7 +37,7 @@ function remove(supplierCode) {
   delSupplier(supplierCode).then(() => {
     Message.info("删除成功,编号: " + supplierCode);
     initSupplierList(1);
-  })
+  });
 }
 </script>
 

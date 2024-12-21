@@ -3,9 +3,9 @@ package com.island.isrm.core.idaccess.domain.dp;
 import com.island.isrm.core.common.domain.dp.Code;
 import org.springframework.util.Assert;
 
-public class UserCode extends Code {
-    public UserCode(String value) {
+public class UserName extends Code {
+    public UserName(String value) {
         super(value);
-        Assert.hasText(value, "用户编码不能为空");
+        Assert.hasText(value, "用户名不能为空");
     }
 }

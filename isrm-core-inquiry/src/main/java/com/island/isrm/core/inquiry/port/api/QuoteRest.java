@@ -27,7 +27,7 @@ public class QuoteRest {
         this.quoteAppService = quoteAppService;
     }
 
-    @PreAuthorize("hasRole('QUOTE')")
+    @PreAuthorize("hasRole('VENDOR')")
     @PostMapping("/request/save")
     public QuoteCode createQuote(@RequestParam String inquiryCode, @RequestParam String supplierCode) {
         // TODO 检验用户的供应商身份, 确保是供应商亲自操作

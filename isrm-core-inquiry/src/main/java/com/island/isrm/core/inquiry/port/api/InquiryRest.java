@@ -90,7 +90,7 @@ public class InquiryRest {
         return this.inquiryQueryService.findByInquiryProductIdAndInquiryCode(inquiryProductId, inquiryCode);
     }
 
-    @PreAuthorize("hasRole('INQUIRY')")
+    @PreAuthorize("hasRole('BUYER')")
     @PostMapping("/{inquiryCode}/product/save")
     public Long saveProduct(@PathVariable String inquiryCode, @RequestBody AddInquiryProductCmd addInquiryProductCmd) {
         return this.inquiryAppService.addProduct(inquiryCode, addInquiryProductCmd);
@@ -106,7 +106,7 @@ public class InquiryRest {
         this.inquiryAppService.removeProduct(new InquiryCode(inquiryCode), new InquiryProductId(inquiryProductId));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_INQUIRY')")
+    @PreAuthorize("hasAuthority('ROLE_BUYER')")
     @GetMapping("/{inquiryCode}/supplier/list")
     public List<InquirySupplierBasic> listSupplier(@PathVariable String inquiryCode) {
         return this.inquiryQueryService.findSupplierBasicByInquiryCode(inquiryCode);

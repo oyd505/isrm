@@ -27,7 +27,8 @@ function handleSubmit(valid, {username, password}) {
       store.$patch({
         supplier: data.userSupplier,
         token: data.token,
-        userName: data.userName
+        userName: data.userName,
+        nickname: data.nickname
       });
       router.push('/main/home');
     })

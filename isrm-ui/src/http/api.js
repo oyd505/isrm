@@ -7,6 +7,24 @@ export const login = (username, password) =>
         }
     });
 
+// ------ 用户 ------
+// 获取用户列表
+export const getUserList = (pageNumber, pageSize) =>
+    service.get("/v1/user/page/basic?pageNumber=".concat(pageNumber - 1).concat("&pageSize=").concat(pageSize));
+// 获取用户详情
+export const getUser = (userName) =>
+    service.get("/v1/user/".concat(userName));
+// 创建用户
+export const saveUser = (user) =>
+    service.post("/v1/user/create", user);
+// 更新用户信息
+export const updateUser = (user) =>
+    service.post("/v1/user/update", user);
+// 删除用户
+export const delUser = (userName) =>
+    service.post("/v1/user/remove/".concat(userName));
+
+
 // ------ 员工 ------
 // 获取精简员工列表
 export const getThinEmployeeList = () =>

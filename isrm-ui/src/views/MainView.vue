@@ -15,12 +15,16 @@ const isCollapsed = ref(false);
           <Icon type="ios-paper"/>
           主页
         </MenuItem>
-        <MenuItem name="2" to="/main/supplier/list">
+        <MenuItem name="2" to="/main/user/list">
           <Icon type="ios-people"/>
+          用户
+        </MenuItem>
+        <MenuItem name="2" to="/main/supplier/list">
+          <Icon type="ios-business"/>
           供应商
         </MenuItem>
         <MenuItem name="3" to="/main/inquiry/request/list">
-          <Icon type="ios-people"/>
+          <Icon type="ios-chatbubbles"/>
           询价
         </MenuItem>
         <MenuItem name="4" to="/main/inquiry/quote/list/inquiry">

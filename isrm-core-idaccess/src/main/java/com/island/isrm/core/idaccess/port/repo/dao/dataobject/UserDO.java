@@ -16,8 +16,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class UserDO extends BaseDataObject {
     @Id
     @Column(nullable = false, length = 32)
-    private String userCode;
-    private String name;
+    private String userName;
+    private String nickname;
     private String password;
     @Column(length = 32)
     private String userType;

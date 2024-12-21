@@ -1,6 +1,9 @@
 package com.island.isrm.core.idaccess.domain.dp;
 
 public enum UserType {
+    /**
+     * 管理员
+     */
     ADMIN {
         @Override
         public boolean isAdmin() {
@@ -11,7 +14,14 @@ public enum UserType {
         public boolean isExternal() {
             return true;
         }
-    }, EMPLOYEE,
+    },
+    /**
+     * 内部员工
+     */
+    EMPLOYEE,
+    /**
+     * 外部供应商
+     */
     SUPPLIER {
         @Override
         public boolean isExternal() {
