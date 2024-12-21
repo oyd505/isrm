@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (!StringUtils.hasText(userDO.getUserName())) {
             throw new UsernameNotFoundException("username " + username + " is not found");
         }
-        return User.withUsername(userDO.getUserName()).password(userDO.getPassword()).roles(userDO.getRoles())
+        return User.withUsername(userDO.getUserName()).password(userDO.getPassword()).roles(userDO.getRoles().split(","))
                 .disabled(userDO.isDisabled()).accountLocked(userDO.isAccountLocked()).build();
     }
 }
