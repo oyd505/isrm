@@ -1,12 +1,7 @@
 package com.island.isrm.core.inquiry.domain.event;
 
-import com.island.isrm.core.inquiry.domain.dp.inquiry.InquiryCode;
-import com.island.isrm.core.inquiry.domain.dp.inquiry.SupplierCode;
-import com.island.isrm.core.inquiry.domain.dp.quote.QuoteCode;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
-
-import java.util.UUID;
 
 /**
  * 报价已提交事件
@@ -16,14 +11,14 @@ import java.util.UUID;
  */
 @Getter
 public class QuoteSubmittedEvent extends ApplicationEvent {
-    private String quoteCode;
-    private String supplierCode;
-    private String inquiryCode;
+    private final String quoteCode;
+    private final String supplierCode;
+    private final String inquiryCode;
 
-    public QuoteSubmittedEvent(QuoteCode quoteCode, SupplierCode supplierCode, InquiryCode inquiryCode) {
-        super(UUID.randomUUID());
-        this.quoteCode = quoteCode.getValue();
-        this.supplierCode = supplierCode.getValue();
-        this.inquiryCode = inquiryCode.getValue();
+    public QuoteSubmittedEvent(Object source, String quoteCode, String supplierCode, String inquiryCode) {
+        super(source);
+        this.quoteCode = quoteCode;
+        this.supplierCode = supplierCode;
+        this.inquiryCode = inquiryCode;
     }
 }

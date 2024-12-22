@@ -159,12 +159,11 @@ public class InquiryAppServiceImpl implements InquiryAppService {
 
     @Transactional
     @Override
-    public void updateQuoteProgress(QuoteSubmittedEvent quoteSubmittedEvent) {
-        SupplierCode supplierCode = new SupplierCode(quoteSubmittedEvent.getSupplierCode());
-        InquiryRequest inquiryRequest = this.inquiryRequestRepository.findOneInquirySupplier(
-                new InquiryCode(quoteSubmittedEvent.getInquiryCode()), supplierCode
-        );
-        inquiryRequest.updateQuoteProgress(supplierCode, new QuoteCode(quoteSubmittedEvent.getQuoteCode()));
+    public void updateQuoteProgress(QuoteSubmittedEvent event) {
+        SupplierCode supplierCode = new SupplierCode(event.getSupplierCode());
+        InquiryCode inquiryCode = new InquiryCode(event.getInquiryCode());
+        InquiryRequest inquiryRequest = this.inquiryRequestRepository.findOneInquirySupplier(inquiryCode, supplierCode);
+        inquiryRequest.updateQuoteProgress(supplierCode, new QuoteCode(event.getQuoteCode()));
         this.inquiryRequestRepository.updateInquirySupplier(inquiryRequest);
     }
 }

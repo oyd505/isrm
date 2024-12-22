@@ -13,9 +13,8 @@ import com.island.isrm.core.inquiry.domain.entity.QuoteRequest;
 import com.island.isrm.core.inquiry.domain.event.QuoteSubmittedEvent;
 import com.island.isrm.core.inquiry.domain.external.QuoteCodeService;
 import com.island.isrm.core.inquiry.domain.external.QuoteInquiryService;
-import com.island.isrm.core.inquiry.domain.message.QuoteEventPublisher;
 import com.island.isrm.core.inquiry.domain.repo.QuoteRequestRepository;
-import jakarta.annotation.Resource;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,15 +26,15 @@ public class QuoteAppServiceImpl implements QuoteAppService {
     private final QuoteRequestRepository quoteRequestRepository;
     private final QuoteCodeService quoteCodeService;
     private final QuoteInquiryService quoteInquiryService;
-    @Resource
-    private QuoteEventPublisher quoteEventPublisher;
+    private final ApplicationEventPublisher publisher;
 
     public QuoteAppServiceImpl(QuoteRequestRepository quoteRequestRepository,
                                QuoteCodeService quoteCodeService,
-                               QuoteInquiryService quoteInquiryService) {
+                               QuoteInquiryService quoteInquiryService, ApplicationEventPublisher publisher) {
         this.quoteRequestRepository = quoteRequestRepository;
         this.quoteCodeService = quoteCodeService;
         this.quoteInquiryService = quoteInquiryService;
+        this.publisher = publisher;
     }
 
     @Transactional
@@ -82,9 +81,8 @@ public class QuoteAppServiceImpl implements QuoteAppService {
         });
         this.quoteRequestRepository.update(quoteRequest);
         // 发送报价已提交的事件
-        quoteEventPublisher.publishQuoteSubmittedEvent(
-                new QuoteSubmittedEvent(quoteCode, quoteRequest.getSupplier().getCode(), quoteRequest.getInquiryCode())
-        );
+        this.publisher.publishEvent(new QuoteSubmittedEvent(this, quoteCode.getValue(),
+                quoteRequest.getSupplier().getCode().getValue(), quoteRequest.getInquiryCode().getValue()));
     }
 
     @Transactional
