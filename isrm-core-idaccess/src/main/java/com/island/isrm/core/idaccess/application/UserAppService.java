@@ -1,5 +1,7 @@
 package com.island.isrm.core.idaccess.application;
 
+import com.island.isrm.core.common.domain.event.SupplierContactCreatedEvent;
+import com.island.isrm.core.common.domain.event.SupplierCreatedEvent;
 import com.island.isrm.core.idaccess.application.command.CreateUserCmd;
 import com.island.isrm.core.idaccess.application.command.UpdatePasswordCmd;
 import com.island.isrm.core.idaccess.application.command.UpdateUserCmd;
@@ -12,6 +14,10 @@ import java.util.List;
 @Validated
 public interface UserAppService {
     UserName create(@Valid CreateUserCmd command);
+
+    void create(SupplierCreatedEvent event);
+
+    void create(SupplierContactCreatedEvent event);
 
     void update(@Valid UpdateUserCmd command);
 

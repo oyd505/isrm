@@ -18,6 +18,18 @@ public class UserAssembler {
         return user;
     }
 
+    public User toAddEntity(String supplierCode, String supplierName) {
+        return this.toAddEntity(supplierCode, supplierName, supplierCode, supplierName);
+    }
+
+    public User toAddEntity(String userName, String nickname, String supplierCode, String supplierName) {
+        User user = new User(new UserName(userName));
+        user.setNickname(new Name(nickname));
+        user.setUserType(UserType.SUPPLIER);
+        user.setUserSupplier(new UserSupplier(supplierCode, supplierName));
+        return user;
+    }
+
     private void assemble(User user, CreateUserCmd command) {
         user.setNickname(new Name(command.getNickname()));
         user.setUserType(UserType.valueOf(command.getUserType()));

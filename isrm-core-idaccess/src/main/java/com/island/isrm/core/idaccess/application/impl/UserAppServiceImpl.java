@@ -1,6 +1,8 @@
 package com.island.isrm.core.idaccess.application.impl;
 
 import com.island.isrm.core.common.domain.dp.Password;
+import com.island.isrm.core.common.domain.event.SupplierContactCreatedEvent;
+import com.island.isrm.core.common.domain.event.SupplierCreatedEvent;
 import com.island.isrm.core.idaccess.application.UserAppService;
 import com.island.isrm.core.idaccess.application.UserAssembler;
 import com.island.isrm.core.idaccess.application.command.CreateUserCmd;
@@ -33,7 +35,30 @@ public class UserAppServiceImpl implements UserAppService {
     @Transactional
     @Override
     public UserName create(CreateUserCmd command) {
-        User user = this.userAssembler.toAddEntity(command, new UserName(command.getUserName()));
+        User user = this.userAssembler.toAddEntity(command, new UserName(command.generateUserName()));
+        return this.createHandler(user);
+    }
+
+    @Transactional
+    @Override
+    public void create(SupplierCreatedEvent event) {
+        String supplierCode = event.getSupplierCode();
+        String supplierName = event.getSupplierName();
+        User user = this.userAssembler.toAddEntity(supplierCode, supplierName);
+        this.createHandler(user);
+    }
+
+    @Override
+    public void create(SupplierContactCreatedEvent event) {
+        String supplierCode = event.getSupplierCode();
+        String supplierName = event.getSupplierName();
+        String phone = event.getPhone();
+        String contactName = event.getContactName();
+        User user = this.userAssembler.toAddEntity(phone, contactName, supplierCode, supplierName);
+        this.createHandler(user);
+    }
+
+    private UserName createHandler(User user) {
         Password password = this.userPasswordService.generatePassword();
         user.setPassword(password);
         UserStatus userStatus = this.userStatusService.init(user.getUserType());
