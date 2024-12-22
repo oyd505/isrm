@@ -1,5 +1,6 @@
 package com.island.isrm.core.inquiry.application.impl;
 
+import com.island.isrm.core.common.domain.external.DomainEventPublisher;
 import com.island.isrm.core.inquiry.application.QuoteAppService;
 import com.island.isrm.core.inquiry.application.QuoteAssembler;
 import com.island.isrm.core.inquiry.application.command.UpdateQuoteItemCmd;
@@ -14,7 +15,6 @@ import com.island.isrm.core.inquiry.domain.event.QuoteSubmittedEvent;
 import com.island.isrm.core.inquiry.domain.external.QuoteCodeService;
 import com.island.isrm.core.inquiry.domain.external.QuoteInquiryService;
 import com.island.isrm.core.inquiry.domain.repo.QuoteRequestRepository;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +26,11 @@ public class QuoteAppServiceImpl implements QuoteAppService {
     private final QuoteRequestRepository quoteRequestRepository;
     private final QuoteCodeService quoteCodeService;
     private final QuoteInquiryService quoteInquiryService;
-    private final ApplicationEventPublisher publisher;
+    private final DomainEventPublisher publisher;
 
     public QuoteAppServiceImpl(QuoteRequestRepository quoteRequestRepository,
                                QuoteCodeService quoteCodeService,
-                               QuoteInquiryService quoteInquiryService, ApplicationEventPublisher publisher) {
+                               QuoteInquiryService quoteInquiryService, DomainEventPublisher publisher) {
         this.quoteRequestRepository = quoteRequestRepository;
         this.quoteCodeService = quoteCodeService;
         this.quoteInquiryService = quoteInquiryService;

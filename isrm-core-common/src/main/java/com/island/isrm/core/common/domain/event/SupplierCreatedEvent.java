@@ -1,10 +1,9 @@
 package com.island.isrm.core.common.domain.event;
 
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class SupplierCreatedEvent extends ApplicationEvent {
+public class SupplierCreatedEvent extends DomainEvent {
     private final String supplierCode;
     private final String supplierName;
 

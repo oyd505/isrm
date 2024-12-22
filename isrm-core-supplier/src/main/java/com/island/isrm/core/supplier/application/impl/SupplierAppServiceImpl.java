@@ -2,6 +2,7 @@ package com.island.isrm.core.supplier.application.impl;
 
 import com.island.isrm.core.common.domain.event.SupplierContactCreatedEvent;
 import com.island.isrm.core.common.domain.event.SupplierCreatedEvent;
+import com.island.isrm.core.common.domain.external.DomainEventPublisher;
 import com.island.isrm.core.supplier.application.SupplierAppService;
 import com.island.isrm.core.supplier.application.SupplierAssembler;
 import com.island.isrm.core.supplier.application.command.AddSupplierContactCmd;
@@ -15,7 +16,6 @@ import com.island.isrm.core.supplier.domain.entity.Supplier;
 import com.island.isrm.core.supplier.domain.entity.SupplierContact;
 import com.island.isrm.core.supplier.domain.external.SupplierCodeService;
 import com.island.isrm.core.supplier.domain.repo.SupplierRepository;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,12 +34,12 @@ public class SupplierAppServiceImpl implements SupplierAppService {
     // 供应商编码服务
     private final SupplierCodeService supplierCodeService;
     // 应用事件发布器
-    private final ApplicationEventPublisher publisher;
+    private final DomainEventPublisher publisher;
 
     /**
      * 构造函数注入所需服务和仓储
      */
-    public SupplierAppServiceImpl(SupplierRepository supplierRepository, SupplierCodeService supplierCodeService, ApplicationEventPublisher publisher) {
+    public SupplierAppServiceImpl(SupplierRepository supplierRepository, SupplierCodeService supplierCodeService, DomainEventPublisher publisher) {
         this.supplierRepository = supplierRepository;
         this.supplierCodeService = supplierCodeService;
         this.publisher = publisher;

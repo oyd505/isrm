@@ -1,7 +1,7 @@
 package com.island.isrm.core.inquiry.domain.event;
 
+import com.island.isrm.core.common.domain.event.DomainEvent;
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
 
 /**
  * 报价已提交事件
@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationEvent;
  * @since 2024-03-23
  */
 @Getter
-public class QuoteSubmittedEvent extends ApplicationEvent {
+public class QuoteSubmittedEvent extends DomainEvent {
     private final String quoteCode;
     private final String supplierCode;
     private final String inquiryCode;
