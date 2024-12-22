@@ -274,7 +274,7 @@ public class InquiryRequest extends BaseEntity {
     /**
      * 确认邀请
      *
-     * @param supplierCode 供应商代码
+     * @param supplierCode 供应商编码
      */
     public void confirmInvitation(SupplierCode supplierCode) {
         this.checkResponseEnabled();
@@ -286,7 +286,7 @@ public class InquiryRequest extends BaseEntity {
     /**
      * 检查是否可报价
      *
-     * @param supplierCode 供应商代码
+     * @param supplierCode 供应商编码
      * @return 供应商
      */
     public InquirySupplier checkQuoteEnabled(SupplierCode supplierCode) {
@@ -309,7 +309,7 @@ public class InquiryRequest extends BaseEntity {
     /**
      * 更新报价进度
      *
-     * @param supplierCode 供应商代码
+     * @param supplierCode 供应商编码
      * @param quoteCode    报价编码
      */
     public void updateQuoteProgress(SupplierCode supplierCode, QuoteCode quoteCode) {

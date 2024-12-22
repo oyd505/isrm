@@ -27,11 +27,27 @@ public class SupplierContact extends BaseEntity {
     @Setter
     private Contact contact;
 
+    /**
+     * 构造方法
+     *
+     * 初始化供应商联系人对象，设置供应商联系人ID和供应商编码
+     *
+     * @param supplierContactId 供应商联系人ID
+     * @param supplierCode 供应商编码
+     */
     public SupplierContact(SupplierContactId supplierContactId, SupplierCode supplierCode) {
         this.supplierContactId = supplierContactId;
         this.supplierCode = supplierCode;
     }
 
+    /**
+     * 更新供应商联系人信息
+     *
+     * 此方法用于更新供应商联系人的联系人信息部分
+     * 它通过传入一个新的供应商联系人对象来更新当前对象的联系人信息
+     *
+     * @param supplierContact 新的供应商联系人对象，包含更新的联系人信息
+     */
     public void update(SupplierContact supplierContact) {
         this.contact = supplierContact.getContact();
     }

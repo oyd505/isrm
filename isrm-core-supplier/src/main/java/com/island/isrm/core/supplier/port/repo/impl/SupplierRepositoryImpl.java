@@ -17,6 +17,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * SupplierRepository的实现类，负责供应商相关的数据持久化操作
+ *
+ * @author dao.ouyang
+ * @since 2024-12-15
+ */
 @Component
 public class SupplierRepositoryImpl implements SupplierRepository {
     private final SupplierJpa supplierJpa;
@@ -32,6 +38,13 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         this.supplierContactConverter = supplierContactConverter;
     }
 
+    /**
+     * 根据供应商编码查找供应商实体
+     *
+     * @param supplierCode 供应商编码
+     * @return 供应商实体
+     * @throws DataNotFoundException 如果找不到供应商，则抛出数据不存在异常
+     */
     @Override
     public Supplier find(SupplierCode supplierCode) {
         Optional<SupplierDO> supplierDO = this.supplierJpa.findById(supplierCode.getValue());
@@ -40,24 +53,48 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         ));
     }
 
+    /**
+     * 添加供应商实体
+     *
+     * @param supplier 供应商实体
+     * @return 添加后的供应商编码
+     */
     @Override
     public SupplierCode add(Supplier supplier) {
         SupplierDO supplierDO = this.supplierConverter.fromEntity(supplier);
         return new SupplierCode(this.supplierJpa.save(supplierDO).getSupplierCode());
     }
 
+    /**
+     * 更新供应商实体
+     *
+     * @param supplier 供应商实体
+     */
     @Override
     public void update(Supplier supplier) {
         SupplierDO supplierDO = this.supplierConverter.fromEntity(supplier);
         this.supplierJpa.save(supplierDO);
     }
 
+    /**
+     * 删除供应商及其所有联系人
+     *
+     * @param supplierCode 供应商编码
+     */
     @Override
     public void removeAll(SupplierCode supplierCode) {
         this.supplierJpa.deleteById(supplierCode.getValue());
         this.supplierContactJpa.deleteBySupplierCode(supplierCode.getValue());
     }
 
+    /**
+     * 查找特定供应商的特定联系人，并将其添加到供应商的联系人列表中
+     *
+     * @param supplierCode      供应商编码
+     * @param supplierContactId 供应商联系人ID
+     * @return 包含所需联系人的供应商实体
+     * @throws DataNotFoundException 如果供应商或联系人不存在，则抛出数据不存在异常
+     */
     @Override
     public Supplier findOneSupplierContact(SupplierCode supplierCode, SupplierContactId supplierContactId) {
         Supplier supplier = this.find(supplierCode);
@@ -71,6 +108,13 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         return supplier;
     }
 
+    /**
+     * 添加供应商联系人
+     *
+     * @param supplier 供应商实体，包含待添加的联系人
+     * @return 添加后的供应商联系人ID
+     * @throws DataNotFoundException 如果供应商或联系人列表为空，则抛出数据不存在异常
+     */
     @Override
     public SupplierContactId addOneSupplierContact(Supplier supplier) {
         if (supplier == null || supplier.getSupplierContacts().isEmpty()) {
@@ -87,6 +131,11 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         }
     }
 
+    /**
+     * 更新供应商的所有联系人
+     *
+     * @param supplier 供应商实体，包含所有待更新的联系人
+     */
     @Override
     public void updateSupplierContact(Supplier supplier) {
         List<SupplierContactDO> supplierContactDOList = supplier.getSupplierContacts().stream().
@@ -94,6 +143,11 @@ public class SupplierRepositoryImpl implements SupplierRepository {
         this.supplierContactJpa.saveAll(supplierContactDOList);
     }
 
+    /**
+     * 删除供应商的特定联系人
+     *
+     * @param supplierContactId 供应商联系人ID
+     */
     @Override
     public void removeOneSupplierContact(SupplierContactId supplierContactId) {
         this.supplierContactJpa.deleteById(supplierContactId.getId());
