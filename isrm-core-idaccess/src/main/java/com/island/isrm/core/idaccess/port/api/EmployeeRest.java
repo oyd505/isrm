@@ -1,30 +1,57 @@
 package com.island.isrm.core.idaccess.port.api;
 
+import com.island.isrm.core.idaccess.application.EmployeeAppService;
+import com.island.isrm.core.idaccess.application.command.CreateEmployeeCmd;
+import com.island.isrm.core.idaccess.application.command.UpdateEmployeeCmd;
+import com.island.isrm.core.idaccess.domain.dp.EmployeeCode;
+import com.island.isrm.core.idaccess.port.repo.dao.dataobject.EmployeeDO;
+import com.island.isrm.core.idaccess.port.repo.dao.projection.EmployeeBasic;
 import com.island.isrm.core.idaccess.port.repo.dao.projection.EmployeeCodeAndName;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.island.isrm.core.idaccess.port.repo.service.EmployeeQueryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/employee")
 public class EmployeeRest {
+    private final EmployeeAppService employeeAppService;
+    private final EmployeeQueryService employeeQueryService;
+
+    public EmployeeRest(EmployeeAppService employeeAppService, EmployeeQueryService employeeQueryService) {
+        this.employeeAppService = employeeAppService;
+        this.employeeQueryService = employeeQueryService;
+    }
+
+    @GetMapping("/page/basic")
+    public Page<EmployeeBasic> pageBasic(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return this.employeeQueryService.pageBasic(PageRequest.of(pageNumber, pageSize));
+    }
 
     @GetMapping("/list/code/name")
     public List<EmployeeCodeAndName> listCodeAndName() {
-        List<EmployeeCodeAndName> data = new ArrayList<>();
-        data.add(new EmployeeCodeAndName("E1000", "北堂宇"));
-        data.add(new EmployeeCodeAndName("E1001", "西门清"));
-        data.add(new EmployeeCodeAndName("E1002", "司马晨"));
-        data.add(new EmployeeCodeAndName("E1003", "龙浩然"));
-        data.add(new EmployeeCodeAndName("E1004", "凤九天"));
-        data.add(new EmployeeCodeAndName("E1005", "慕容云"));
-        data.add(new EmployeeCodeAndName("E1006", "欧阳晨"));
-        data.add(new EmployeeCodeAndName("E1007", "令狐飞"));
-        data.add(new EmployeeCodeAndName("E1008", "东方明"));
-        data.add(new EmployeeCodeAndName("E1009", "南宫轩"));
-        return data;
+        return employeeQueryService.listCodeAndName();
+    }
+
+    @GetMapping("/{employeeCode}")
+    public EmployeeDO find(@PathVariable String employeeCode) {
+        return employeeQueryService.find(employeeCode);
+    }
+
+    @PostMapping("/create")
+    public String create(@RequestBody CreateEmployeeCmd command) {
+        return employeeAppService.create(command).getValue();
+    }
+
+    @PostMapping("/update")
+    public void update(@RequestBody UpdateEmployeeCmd command) {
+        employeeAppService.update(command);
+    }
+
+    @PostMapping("/remove/{employeeCode}")
+    public void remove(@PathVariable String employeeCode) {
+        employeeAppService.remove(new EmployeeCode(employeeCode));
     }
 }

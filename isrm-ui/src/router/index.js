@@ -21,6 +21,17 @@ const router = createRouter({
                     component: () => import("@/views/user/EditView.vue"),
                 },
 
+                // ------ 员工 ------
+                {
+                    path: "employee/list",
+                    name: "employee",
+                    component: () => import("@/views/employee/ListView.vue"),
+                },
+                {
+                    path: "employee/edit/:employeeCode",
+                    component: () => import("@/views/employee/EditView.vue"),
+                },
+
                 // ------ 供应商 ------
                 {
                     path: "supplier/list",

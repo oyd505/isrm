@@ -1,6 +1,7 @@
 package com.island.isrm.core.idaccess.application.impl;
 
 import com.island.isrm.core.common.domain.dp.Password;
+import com.island.isrm.core.common.domain.event.EmployeeCreatedEvent;
 import com.island.isrm.core.common.domain.event.SupplierContactCreatedEvent;
 import com.island.isrm.core.common.domain.event.SupplierCreatedEvent;
 import com.island.isrm.core.idaccess.application.UserAppService;
@@ -44,7 +45,7 @@ public class UserAppServiceImpl implements UserAppService {
     public void create(SupplierCreatedEvent event) {
         String supplierCode = event.getSupplierCode();
         String supplierName = event.getSupplierName();
-        User user = this.userAssembler.toAddEntity(supplierCode, supplierName);
+        User user = this.userAssembler.toAddEntityForSupplier(supplierCode, supplierName);
         this.createHandler(user);
     }
 
@@ -54,7 +55,15 @@ public class UserAppServiceImpl implements UserAppService {
         String supplierName = event.getSupplierName();
         String phone = event.getPhone();
         String contactName = event.getContactName();
-        User user = this.userAssembler.toAddEntity(phone, contactName, supplierCode, supplierName);
+        User user = this.userAssembler.toAddEntityForSupplier(phone, contactName, supplierCode, supplierName);
+        this.createHandler(user);
+    }
+
+    @Override
+    public void create(EmployeeCreatedEvent event) {
+        String employeeCode = event.getEmployeeCode();
+        String employeeName = event.getEmployeeName();
+        User user = this.userAssembler.toAddEntityForEmployee(employeeCode, employeeName);
         this.createHandler(user);
     }
 

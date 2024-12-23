@@ -1,5 +1,6 @@
 package com.island.isrm.core.idaccess.application;
 
+import com.island.isrm.core.common.domain.event.EmployeeCreatedEvent;
 import com.island.isrm.core.common.domain.event.SupplierContactCreatedEvent;
 import com.island.isrm.core.common.domain.event.SupplierCreatedEvent;
 import com.island.isrm.core.idaccess.application.command.CreateUserCmd;
@@ -18,6 +19,8 @@ public interface UserAppService {
     void create(SupplierCreatedEvent event);
 
     void create(SupplierContactCreatedEvent event);
+
+    void create(EmployeeCreatedEvent event);
 
     void update(@Valid UpdateUserCmd command);
 

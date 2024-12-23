@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import {RouterView} from "vue-router";
-import {Content, Icon, Layout, Menu, MenuItem, Sider} from "view-ui-plus";
+import {Content, Icon, Layout, Menu, MenuItem, Sider, Submenu} from "view-ui-plus";
 
 const theme = ref("light");
 const isCollapsed = ref(false);
@@ -15,10 +15,20 @@ const isCollapsed = ref(false);
           <Icon type="ios-paper"/>
           主页
         </MenuItem>
-        <MenuItem name="2" to="/main/user/list">
-          <Icon type="ios-people"/>
-          用户
-        </MenuItem>
+        <Submenu name="2">
+          <template #title>
+            <Icon type="ios-paper"/>
+            基础数据
+          </template>
+          <MenuItem name="2-1" to="/main/employee/list">
+            <Icon type="ios-person"/>
+            员工
+          </MenuItem>
+          <MenuItem name="2-2" to="/main/user/list">
+            <Icon type="ios-people"/>
+            用户
+          </MenuItem>
+        </Submenu>
         <MenuItem name="2" to="/main/supplier/list">
           <Icon type="ios-subway"/>
           供应商

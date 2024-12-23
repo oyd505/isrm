@@ -35,9 +35,24 @@ export const delUser = (userName) =>
 
 
 // ------ 员工 ------
+// 获取员工列表
+export const getEmployeeList = (pageNumber, pageSize) =>
+    service.get("/v1/employee/page/basic?pageNumber=".concat(pageNumber - 1).concat("&pageSize=").concat(pageSize));
 // 获取精简员工列表
 export const getThinEmployeeList = () =>
     service.get("/v1/employee/list/code/name");
+// 获取员工详情
+export const getEmployee = (employeeCode) =>
+    service.get("/v1/employee/".concat(employeeCode));
+// 创建员工
+export const saveEmployee = (employee) =>
+    service.post("/v1/employee/create", employee);
+// 更新员工信息
+export const updateEmployee = (employee) =>
+    service.post("/v1/employee/update", employee);
+// 删除员工
+export const delEmployee = (employeeCode) =>
+    service.post("/v1/employee/remove/".concat(employeeCode));
 
 // ------ 组织 ------
 // 获取精简采购组织列表

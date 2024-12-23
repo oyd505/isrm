@@ -18,15 +18,23 @@ public class UserAssembler {
         return user;
     }
 
-    public User toAddEntity(String supplierCode, String supplierName) {
-        return this.toAddEntity(supplierCode, supplierName, supplierCode, supplierName);
+    public User toAddEntityForSupplier(String supplierCode, String supplierName) {
+        return this.toAddEntityForSupplier(supplierCode, supplierName, supplierCode, supplierName);
     }
 
-    public User toAddEntity(String userName, String nickname, String supplierCode, String supplierName) {
+    public User toAddEntityForSupplier(String userName, String nickname, String supplierCode, String supplierName) {
         User user = new User(new UserName(userName));
         user.setNickname(new Name(nickname));
         user.setUserType(UserType.SUPPLIER);
         user.setUserSupplier(new UserSupplier(supplierCode, supplierName));
+        return user;
+    }
+
+    public User toAddEntityForEmployee(String employeeCode, String employeeName) {
+        User user = new User(new UserName(employeeCode));
+        user.setNickname(new Name(employeeName));
+        user.setUserType(UserType.EMPLOYEE);
+        user.setUserEmployee(new UserEmployee(employeeCode, employeeName));
         return user;
     }
 
