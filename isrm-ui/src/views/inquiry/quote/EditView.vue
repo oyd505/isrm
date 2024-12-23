@@ -3,10 +3,11 @@ import {Button, Card, Col, FormItem, Icon, Message, PageHeader, Row} from "view-
 import QuoteRequestForm from "@/components/inquiry/quote/QuoteRequestForm.vue";
 import {onMounted, ref} from "vue";
 import {getQuoteItemList, getQuoteRequest, submitQuoteRequest, updateQuoteItem, updateQuoteRequest} from "@/http/api";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import QuoteItemTable from "@/components/inquiry/quote/QuoteItemTable.vue";
 
 const route = useRoute();
+const router = useRouter();
 const quoteCode = route.params.quoteCode;
 const quote = ref({});
 const loading = ref(true);
@@ -54,10 +55,8 @@ function handleReset() {
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>询价</template>
+  <PageHeader title="报价信息" back @on-back="router.push('/main/inquiry/quote/request/list/'+quote.inquiryCode)">
     <template #action>
-      <Button type="primary" :to="`/main/inquiry/quote/request/list/${quote.inquiryCode}`">返回</Button>
       <Button type="primary" @click="submitQuote" v-if="quote.status === 'PENDING'">提交</Button>
     </template>
   </PageHeader>
@@ -66,7 +65,7 @@ function handleReset() {
       <Card>
         <template #title>
           <Icon type="ios-book"/>
-          询价详情
+          报价详情
         </template>
         <QuoteRequestForm :quote="quote" :disabled="quote.status !== 'PENDING'">
           <FormItem>

@@ -1,21 +1,18 @@
 <script setup>
-import {Button, ButtonGroup, Description, DescriptionList, PageHeader} from "view-ui-plus";
+import {Description, DescriptionList, PageHeader} from "view-ui-plus";
 import SupplierStatusSelect from "@/components/supplier/SupplierStatusSelect.vue";
+import {useRouter} from "vue-router";
 
 defineProps({
   supplierCode: {type: String, required: true},
   supplier: {type: Object, required: true}
-})
+});
+
+const router = useRouter();
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>供应商</template>
-    <template #action>
-      <ButtonGroup>
-        <Button type="primary" :to="`/main/supplier/edit/${supplierCode}`">返回</Button>
-      </ButtonGroup>
-    </template>
+  <PageHeader title="供应商" back @on-back="router.push('/main/supplier/edit/'+supplierCode)">
     <template #content>
       <DescriptionList :col="1">
         <Description term="编码：">{{ supplier.supplierCode }}</Description>

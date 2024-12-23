@@ -71,12 +71,8 @@ function updateUserRoles() {
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>用户</template>
+  <PageHeader title="用户信息" back @on-back="router.push('/main/user/list')">
     <template #action>
-      <ButtonGroup>
-        <Button type="primary" to="/main/user/list">返回</Button>
-      </ButtonGroup>
       <ButtonGroup v-if="userName !== 'undefined'">
         <Button type="info" v-show="user.disabled" @click="enable">启用</Button>
         <Button type="info" v-show="!user.disabled" @click="disable">禁用</Button>

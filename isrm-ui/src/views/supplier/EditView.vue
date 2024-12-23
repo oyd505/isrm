@@ -41,12 +41,10 @@ function handleReset() {
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>供应商</template>
+  <PageHeader title="供应商" back @on-back="router.push('/main/supplier/list')">
     <template #action>
       <ButtonGroup v-if="supplierCode !== 'undefined'">
         <Button type="primary" :to="`/main/supplier/contact/list/${supplierCode}`">联系人</Button>
-        <Button type="primary" to="/main/supplier/list">返回</Button>
       </ButtonGroup>
     </template>
   </PageHeader>

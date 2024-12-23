@@ -1,22 +1,19 @@
 <script setup>
 
-import {Button, ButtonGroup, Description, DescriptionList, PageHeader} from "view-ui-plus";
+import {Description, DescriptionList, PageHeader} from "view-ui-plus";
 import InquiryStatusSelect from "@/components/inquiry/InquiryStatusSelect.vue";
+import {useRouter} from "vue-router";
 
 defineProps({
   inquiryCode: {type: String, required: true},
   inquiry: {type: Object, required: true}
-})
+});
+
+const router = useRouter();
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>询价</template>
-    <template #action>
-      <ButtonGroup>
-        <Button type="primary" :to="`/main/inquiry/request/edit/${inquiryCode}`">返回</Button>
-      </ButtonGroup>
-    </template>
+  <PageHeader title="询价信息" back @on-back="router.push('/main/inquiry/request/edit/'+inquiryCode)">
     <template #content>
       <DescriptionList :col="1">
         <Description term="询价标题：">{{ inquiry.title }}</Description>

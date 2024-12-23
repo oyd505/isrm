@@ -5,13 +5,12 @@ import {Button, ButtonGroup, Card, Col, Drawer, FormItem, Icon, Message, PageHea
 import InquiryRequestForm from "@/components/inquiry/InquiryRequestForm.vue";
 import {
   getInquiryRequest,
+  getInquirySupplierQuoteList,
   publishInquiryRequest,
   saveInquiryRequest,
   submitInquiryRequest,
-  updateInquiryRequest,
-  getInquirySupplierQuoteList
+  updateInquiryRequest
 } from "@/http/api";
-import InquiryProductTable from "@/components/inquiry/product/InquiryProductTable.vue";
 import InquirySupplierQuoteTable from "@/components/inquiry/supplier/InquirySupplierQuoteTable.vue";
 
 const route = useRoute();
@@ -89,14 +88,12 @@ function initInquirySupplierQuoteList() {
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>询价</template>
+  <PageHeader title="询价信息" back @on-back="router.push('/main/inquiry/request/list')">
     <template #action>
       <ButtonGroup v-if="inquiryCode !== 'undefined'">
         <Button type="primary" :to="`/main/inquiry/product/list/${inquiryCode}`">商品</Button>
         <Button type="primary" :to="`/main/inquiry/supplier/list/${inquiryCode}`">供应商</Button>
         <Button type="primary">协作小组</Button>
-        <Button type="primary" to="/main/inquiry/request/list">返回</Button>
       </ButtonGroup>
       <ButtonGroup v-if="inquiryCode !== 'undefined'">
         <Button type="info" v-show="inquiry.status === 'PENDING'" @click="submit">提交</Button>
