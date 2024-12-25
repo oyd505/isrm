@@ -39,6 +39,7 @@ function update() {
         },
         onCancel: () => {
           product.value = {};
+          productCode.value = 'undefined';
           router.push('/main/product/edit/undefined');
         }
       });

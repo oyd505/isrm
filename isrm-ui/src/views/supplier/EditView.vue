@@ -1,5 +1,5 @@
 <script setup>
-import {Button, ButtonGroup, Card, Col, FormItem, Icon, Message, PageHeader, Row} from "view-ui-plus";
+import {Button, ButtonGroup, Card, Col, FormItem, Icon, Message, Modal, PageHeader, Row} from "view-ui-plus";
 import SupplierForm from "@/components/supplier/SupplierForm.vue";
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
@@ -28,9 +28,21 @@ function update() {
   } else {
     saveSupplier(supplier.value).then((id) => {
       supplierCode.value = id;
-      Message.info("保存成功,编号: " + id);
-      initSupplier();
-      router.push(`/main/supplier/edit/${supplierCode.value}`);
+      Modal.confirm({
+        title: '成功',
+        content: `保存成功,编号: ${supplierCode.value}`,
+        okText: '查看详情',
+        cancelText: '继续新增',
+        onOk: () => {
+          initSupplier();
+          router.push(`/main/supplier/edit/${supplierCode.value}`);
+        },
+        onCancel: () => {
+          supplier.value = {};
+          supplierCode.value = 'undefined';
+          router.push('/main/supplier/edit/undefined');
+        }
+      })
     });
   }
 }

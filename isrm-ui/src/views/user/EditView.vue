@@ -31,9 +31,21 @@ function update() {
   } else {
     saveUser(user.value).then((id) => {
       userName.value = id;
-      Message.info("保存成功,用户名: " + id);
-      initUser();
-      router.push(`/main/user/edit/${userName.value}`);
+      Modal.confirm({
+        title: '成功',
+        content: `保存成功,用户名: ${userName.value}`,
+        okText: '查看详情',
+        cancelText: '继续新增',
+        onOk: () => {
+          initUser(); // 重新初始化用户
+          router.push(`/main/user/edit/${userName.value}`); // 更新路由为用户编辑
+        },
+        onCancel: () => {
+          user.value = {};
+          userName.value = 'undefined';
+          router.push('/main/user/edit/undefined');
+        }
+      });
     });
   }
 }

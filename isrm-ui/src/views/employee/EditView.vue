@@ -2,7 +2,7 @@
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
 import {getEmployee, saveEmployee, updateEmployee} from "@/http/api";
-import {Card, FormItem, Icon, Message, PageHeader, Row} from "view-ui-plus";
+import {Card, FormItem, Icon, Message, Modal, PageHeader, Row} from "view-ui-plus";
 import EmployeeForm from "@/components/employee/EmployeeForm.vue";
 
 const route = useRoute();
@@ -28,9 +28,21 @@ function update() {
   } else {
     saveEmployee(employee.value).then(id => {
       employeeCode.value = id;
-      Message.success("保存成功,员工号: " + employeeCode.value);
-      initEmployee();
-      router.push(`/main/employee/edit/${employeeCode.value}`);
+      Modal.confirm({
+        title: '成功',
+        content: `保存成功,员工号: ${employeeCode.value}`,
+        okText: '查看详情',
+        cancelText: '继续新增',
+        onOk: () => {
+          initEmployee(); // 重新初始化员工
+          router.push(`/main/employee/edit/${employeeCode.value}`); // 更新路由为员工编辑
+        },
+        onCancel: () => {
+          employee.value = {};
+          employeeCode.value = 'undefined';
+          router.push('/main/employee/edit/undefined'); // 提供一个默认路径
+        }
+      });
     });
   }
 }
