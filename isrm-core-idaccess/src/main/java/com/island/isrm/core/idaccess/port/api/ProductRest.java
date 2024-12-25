@@ -1,31 +1,57 @@
 package com.island.isrm.core.idaccess.port.api;
 
+import com.island.isrm.core.idaccess.application.ProductAppService;
+import com.island.isrm.core.idaccess.application.command.CreateProductCmd;
+import com.island.isrm.core.idaccess.application.command.UpdateProductCmd;
+import com.island.isrm.core.idaccess.domain.dp.ProductCode;
+import com.island.isrm.core.idaccess.port.repo.dao.dataobject.ProductDO;
+import com.island.isrm.core.idaccess.port.repo.dao.projection.ProductBasic;
 import com.island.isrm.core.idaccess.port.repo.dao.projection.ProductCodeAndName;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.island.isrm.core.idaccess.port.repo.service.ProductQueryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
 public class ProductRest {
+    private final ProductAppService productAppService;
+    private final ProductQueryService productQueryService;
+
+    public ProductRest(ProductAppService productAppService, ProductQueryService productQueryService) {
+        this.productAppService = productAppService;
+        this.productQueryService = productQueryService;
+    }
+
+    @GetMapping("/page/basic")
+    public Page<ProductBasic> pageBasic(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return productQueryService.pageBasic(PageRequest.of(pageNumber, pageSize));
+    }
 
     @GetMapping("/list/code/name")
     public List<ProductCodeAndName> listCodeAndName() {
-        List<ProductCodeAndName> data = new ArrayList<>();
-        data.add(new ProductCodeAndName("P1000", "稀土元素"));
-        data.add(new ProductCodeAndName("P1001", "硅酸盐"));
-        data.add(new ProductCodeAndName("P1002", "钢材"));
-        data.add(new ProductCodeAndName("P1003", "塑料"));
-        data.add(new ProductCodeAndName("P1004", "玻璃"));
-        data.add(new ProductCodeAndName("P1005", "贵金属"));
-        data.add(new ProductCodeAndName("P1006", "石油化工产品"));
-        data.add(new ProductCodeAndName("P1007", "煤炭"));
-        data.add(new ProductCodeAndName("P1008", "木材"));
-        data.add(new ProductCodeAndName("P1009", "水泥"));
-        data.add(new ProductCodeAndName("P1010", "防爆操作柱/100/1 AC220V 10A  IP65 WF2 Ex de IIC T6 Gb/Ex tD A21 IP65 T80℃  立式(配立杆)下进线 壳体均配防雨罩和电缆格兰，旋钮，启停自复位，且带锁停挡位/工程塑料"));
-        return data;
+        return productQueryService.listCodeAndName();
+    }
+
+    @GetMapping("/{productCode}")
+    public ProductDO find(@PathVariable String productCode) {
+        return productQueryService.find(productCode);
+    }
+
+    @PostMapping("/create")
+    public String createProduct(@RequestBody CreateProductCmd command) {
+        return productAppService.create(command).getValue();
+    }
+
+    @PostMapping("/update")
+    public void updateProduct(@RequestBody UpdateProductCmd command) {
+        productAppService.update(command);
+    }
+
+    @PostMapping("/remove/{productCode}")
+    public void removeProduct(@PathVariable String productCode) {
+        productAppService.remove(new ProductCode(productCode));
     }
 }

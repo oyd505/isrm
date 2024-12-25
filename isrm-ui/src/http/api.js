@@ -66,9 +66,24 @@ export const getThinFtyOrganizationList = () =>
     service.get("/v1/organization/list/fo/code/name");
 
 // ------ 商品 ------
+// 获取商品列表
+export const getProductList = (pageNumber, pageSize) =>
+    service.get("/v1/product/page/basic?pageNumber=".concat(pageNumber - 1).concat("&pageSize=").concat(pageSize));
 // 获取精简商品列表
 export const getThinProductList = () =>
     service.get("/v1/product/list/code/name");
+// 获取商品详情
+export const getProduct = (productCode) =>
+    service.get("/v1/product/".concat(productCode));
+// 创建商品
+export const saveProduct = (product) =>
+    service.post("/v1/product/create", product);
+// 更新商品信息
+export const updateProduct = (product) =>
+    service.post("/v1/product/update", product);
+// 删除商品
+export const delProduct = (productCode) =>
+    service.post("/v1/product/remove/".concat(productCode));
 
 // ------ 供应商 ------
 // 获取供应商列表

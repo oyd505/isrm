@@ -28,6 +28,10 @@ const isCollapsed = ref(false);
             <Icon type="ios-people"/>
             用户
           </MenuItem>
+          <MenuItem name="2-3" to="/main/product/list">
+            <Icon type="ios-cart"/>
+            商品
+          </MenuItem>
         </Submenu>
         <MenuItem name="2" to="/main/supplier/list">
           <Icon type="ios-subway"/>
