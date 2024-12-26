@@ -5,13 +5,12 @@ import {Button, ButtonGroup, Card, Col, Drawer, FormItem, Icon, Message, PageHea
 import InquiryRequestForm from "@/components/inquiry/InquiryRequestForm.vue";
 import {
   getInquiryRequest,
+  getInquirySupplierQuoteList,
   publishInquiryRequest,
   saveInquiryRequest,
   submitInquiryRequest,
-  updateInquiryRequest,
-  getInquirySupplierQuoteList
+  updateInquiryRequest
 } from "@/http/api";
-import InquiryProductTable from "@/components/inquiry/product/InquiryProductTable.vue";
 import InquirySupplierQuoteTable from "@/components/inquiry/supplier/InquirySupplierQuoteTable.vue";
 
 const route = useRoute();
@@ -89,8 +88,7 @@ function initInquirySupplierQuoteList() {
 </script>
 
 <template>
-  <PageHeader>
-    <template #title>询价</template>
+  <PageHeader title="询价信息" back @on-back="router.push('/main/inquiry/request/list')">
     <template #action>
       <ButtonGroup v-if="inquiryCode !== 'undefined'">
         <Button type="primary" :to="`/main/inquiry/product/list/${inquiryCode}`">商品</Button>
@@ -121,7 +119,7 @@ function initInquirySupplierQuoteList() {
     </Col>
   </Row>
 
-  <Drawer title="询价供应商报价监控" placement="bottom" :closable="false" v-model="supplierQuoteDrawer">
+  <Drawer title="询价供应商报价监控" placement="bottom" :closable="false" v-model="supplierQuoteDrawer" height="60">
     <InquirySupplierQuoteTable :loading="supplierQuoteLoading" :supplierQuoteList="supplierQuoteList"/>
   </Drawer>
 </template>

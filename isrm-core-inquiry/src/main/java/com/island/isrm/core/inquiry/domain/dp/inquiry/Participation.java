@@ -7,7 +7,10 @@ package com.island.isrm.core.inquiry.domain.dp.inquiry;
  * @since 2024-03-22
  */
 public enum Participation {
-    INVITED, OPEN {
+    // 表示被邀请参与
+    INVITED, 
+    // 表示开放参与
+    OPEN {
         @Override
         public boolean isOpen() {
             return true;

@@ -19,6 +19,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * 询价请求仓储接口实现类
+ *
+ * @author dao.ouyang
+ * @since 2024-12-22
+ */
 @Component
 public class InquiryRequestRepoImpl implements InquiryRequestRepository {
     private final InquiryRequestJpa inquiryRequestJpa;
@@ -30,6 +36,16 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
     private final InquirySupplierJpa inquirySupplierJpa;
     private final InquirySupplierConverter inquirySupplierConverter;
 
+    /**
+     * 构造函数
+     *
+     * @param inquiryRequestJpa        询价请求数据访问接口
+     * @param inquiryRequestConverter  询价请求转换器
+     * @param inquiryProductJpa        询价商品数据访问接口
+     * @param inquiryProductConverter  询价商品转换器
+     * @param inquirySupplierJpa       询价供应商数据访问接口
+     * @param inquirySupplierConverter 询价供应商转换器
+     */
     public InquiryRequestRepoImpl(InquiryRequestJpa inquiryRequestJpa, InquiryRequestConverter inquiryRequestConverter,
                                   InquiryProductJpa inquiryProductJpa, InquiryProductConverter inquiryProductConverter,
                                   InquirySupplierJpa inquirySupplierJpa, InquirySupplierConverter inquirySupplierConverter) {
@@ -41,6 +57,12 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         this.inquirySupplierConverter = inquirySupplierConverter;
     }
 
+    /**
+     * 查找询价申请
+     *
+     * @param inquiryCode 询价编码
+     * @return 询价请求实体
+     */
     @Override
     public InquiryRequest find(InquiryCode inquiryCode) {
         Optional<InquiryRequestDO> inquiryRequestDO = this.inquiryRequestJpa.findById(inquiryCode.getValue());
@@ -49,6 +71,12 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         ));
     }
 
+    /**
+     * 查找询价申请，同时查询询价商品和询价供应商
+     *
+     * @param inquiryCode 询价编码
+     * @return 询价请求实体
+     */
     @Override
     public InquiryRequest findAll(InquiryCode inquiryCode) {
         InquiryRequest inquiryRequest = this.find(inquiryCode);
@@ -63,24 +91,45 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         return inquiryRequest;
     }
 
+    /**
+     * 添加询价请求
+     *
+     * @param inquiryRequest 询价请求实体
+     * @return 询价编码
+     */
     @Override
     public InquiryCode add(InquiryRequest inquiryRequest) {
         InquiryRequestDO inquiryRequestDO = this.inquiryRequestConverter.fromEntity(inquiryRequest);
         return new InquiryCode(this.inquiryRequestJpa.save(inquiryRequestDO).getInquiryCode());
     }
 
+    /**
+     * 更新询价请求
+     *
+     * @param inquiryRequest 询价请求实体
+     */
     @Override
     public void update(InquiryRequest inquiryRequest) {
         InquiryRequestDO inquiryRequestDO = this.inquiryRequestConverter.fromEntity(inquiryRequest);
         this.inquiryRequestJpa.save(inquiryRequestDO);
     }
 
+    /**
+     * 更新询价请求并同时更新询价商品
+     *
+     * @param inquiryRequest 询价请求实体
+     */
     @Override
     public void updateAndInquiryProduct(InquiryRequest inquiryRequest) {
         this.update(inquiryRequest);
         this.updateInquiryProduct(inquiryRequest);
     }
 
+    /**
+     * 移除所有与特定询价编码相关的记录
+     *
+     * @param inquiryCode 询价编码
+     */
     @Override
     public void removeAll(InquiryCode inquiryCode) {
         this.inquiryRequestJpa.deleteById(inquiryCode.getValue());
@@ -88,6 +137,13 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         this.inquirySupplierJpa.deleteByInquiryCode(inquiryCode.getValue());
     }
 
+    /**
+     * 查找特定询价编码和询价商品ID对应的询价请求
+     *
+     * @param inquiryCode      询价编码
+     * @param inquiryProductId 询价商品ID
+     * @return 询价请求实体
+     */
     @Override
     public InquiryRequest findOneInquiryProduct(InquiryCode inquiryCode, InquiryProductId inquiryProductId) {
         InquiryRequest inquiryRequest = this.find(inquiryCode);
@@ -103,6 +159,12 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         return inquiryRequest;
     }
 
+    /**
+     * 添加一个询价商品到询价请求中
+     *
+     * @param inquiryRequest 询价请求实体
+     * @return 新增的询价商品ID
+     */
     @Override
     public InquiryProductId addOneInquiryProduct(InquiryRequest inquiryRequest) {
         if (inquiryRequest == null || inquiryRequest.getInquiryProducts() == null) {
@@ -119,6 +181,11 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         }
     }
 
+    /**
+     * 更新询价请求中的所有询价商品
+     *
+     * @param inquiryRequest 询价请求实体
+     */
     @Override
     public void updateInquiryProduct(InquiryRequest inquiryRequest) {
         List<InquiryProductDO> inquiryProductDOList = inquiryRequest.getInquiryProducts().stream().
@@ -126,11 +193,23 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         this.inquiryProductJpa.saveAll(inquiryProductDOList);
     }
 
+    /**
+     * 移除特定ID的询价商品
+     *
+     * @param inquiryProductId 询价商品ID
+     */
     @Override
     public void removeOneInquiryProduct(InquiryProductId inquiryProductId) {
         this.inquiryProductJpa.deleteById(inquiryProductId.getId());
     }
 
+    /**
+     * 查找特定询价编码和供应商ID对应的询价请求
+     *
+     * @param inquiryCode       询价编码
+     * @param inquirySupplierId 供应商ID
+     * @return 询价请求实体
+     */
     @Override
     public InquiryRequest findOneInquirySupplier(InquiryCode inquiryCode, InquirySupplierId inquirySupplierId) {
         InquiryRequest inquiryRequest = this.find(inquiryCode);
@@ -145,6 +224,13 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         return inquiryRequest;
     }
 
+    /**
+     * 根据供应商编码查找特定询价编码对应的询价请求
+     *
+     * @param inquiryCode  询价编码
+     * @param supplierCode 供应商编码
+     * @return 询价请求实体
+     */
     @Override
     public InquiryRequest findOneInquirySupplier(InquiryCode inquiryCode, SupplierCode supplierCode) {
         InquiryRequest inquiryRequest = this.find(inquiryCode);
@@ -158,6 +244,12 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         return inquiryRequest;
     }
 
+    /**
+     * 添加一个询价供应商到询价请求中
+     *
+     * @param inquiryRequest 询价请求实体
+     * @return 新增的询价供应商ID
+     */
     @Override
     public InquirySupplierId addOneInquirySupplier(InquiryRequest inquiryRequest) {
         if (inquiryRequest == null || inquiryRequest.getInquirySuppliers() == null) {
@@ -174,6 +266,11 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         }
     }
 
+    /**
+     * 更新询价请求中的所有询价供应商
+     *
+     * @param inquiryRequest 询价请求实体
+     */
     @Override
     public void updateInquirySupplier(InquiryRequest inquiryRequest) {
         List<InquirySupplierDO> inquirySupplierDOList = inquiryRequest.getInquirySuppliers().stream().
@@ -181,6 +278,11 @@ public class InquiryRequestRepoImpl implements InquiryRequestRepository {
         this.inquirySupplierJpa.saveAll(inquirySupplierDOList);
     }
 
+    /**
+     * 移除特定ID的询价供应商
+     *
+     * @param inquirySupplierId 询价供应商ID
+     */
     @Override
     public void removeOneInquirySupplier(InquirySupplierId inquirySupplierId) {
         this.inquirySupplierJpa.deleteById(inquirySupplierId.getId());

@@ -19,6 +19,8 @@ function initInquiryRequestList() {
       requestList.value = data;
       loading.value = false;
     });
+  } else {
+    loading.value = false;
   }
 }
 

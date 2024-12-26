@@ -16,6 +16,12 @@ public class QuoteProgress {
     // 报价编码
     private final String quoteCode;
 
+    /**
+     * 构造函数
+     *
+     * @param quoteCount 报价次数，如果为null或负数，则默认为0
+     * @param quoteCode  报价编码
+     */
     public QuoteProgress(Integer quoteCount, String quoteCode) {
         if (quoteCount == null || quoteCount < 0) {
             this.quoteCount = 0;
@@ -30,6 +36,7 @@ public class QuoteProgress {
      *
      * @param quoteCode 新的报价编码
      * @return 新的报价进度
+     * @throws IllegalArgumentException 如果报价编码为空，则抛出异常
      */
     public QuoteProgress createNextProgress(String quoteCode) {
         if (!StringUtils.hasText(quoteCode)) {

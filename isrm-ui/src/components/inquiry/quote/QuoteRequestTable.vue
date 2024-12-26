@@ -1,7 +1,10 @@
+ template
 <script setup>
+// 导入 Table 组件和报价状态选择组件
 import {Table} from "view-ui-plus";
-import QuoteStatusSpan from "@/components/inquiry/quote/QuoteStatusSpan.vue";
+import QuoteStatusSelect from "@/components/inquiry/quote/QuoteStatusSelect.vue";
 
+// 定义表格的列配置
 const columns = [
   {title: "序号", type: "index", width: 80},
   {
@@ -27,6 +30,8 @@ const columns = [
     align: "center",
   },
 ];
+
+// 定义组件的 props
 defineProps({
   loading: Boolean,
   requestList: {type: Object, required: true},
@@ -36,7 +41,7 @@ defineProps({
 <template>
   <Table :loading="loading" stripe :columns="columns" :data="requestList">
     <template #status="{ row }">
-      <QuoteStatusSpan :status="row.status"/>
+      <QuoteStatusSelect v-model="row.status" comp-type="span"/>
     </template>
     <template #action="{ row, index }">
       <slot :row="row" :index="index"></slot>

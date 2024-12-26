@@ -10,6 +10,13 @@ import lombok.Data;
  */
 @Data
 public class Contact {
+    /**
+     * 名字
+     */
     private final String name;
+    
+    /**
+     * 电话
+     */
     private final String phone;
 }

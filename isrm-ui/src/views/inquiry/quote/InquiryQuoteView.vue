@@ -128,8 +128,7 @@ function initInquiryProductList() {
 }
 </script>
 <template>
-  <PageHeader>
-    <template #title>报价</template>
+  <PageHeader title="报价申请" back @on-back="router.push('/main/inquiry/quote/list/inquiry')">
     <template #action>
       <ButtonGroup>
         <Button type="primary" @click="apply()" v-if="!supplier.id">申请</Button>

@@ -10,6 +10,52 @@ const router = createRouter({
             component: () => import("@/views/MainView.vue"),
             children: [
                 {path: "home", component: () => import("@/views/HomeView.vue")},
+                // ------ 用户 ------
+                {
+                    path: "user/list",
+                    name: "user",
+                    component: () => import("@/views/user/ListView.vue"),
+                },
+                {
+                    path: "user/edit/:userName",
+                    component: () => import("@/views/user/EditView.vue"),
+                },
+
+                // ------ 员工 ------
+                {
+                    path: "employee/list",
+                    name: "employee",
+                    component: () => import("@/views/employee/ListView.vue"),
+                },
+                {
+                    path: "employee/edit/:employeeCode",
+                    component: () => import("@/views/employee/EditView.vue"),
+                },
+                // ------ 商品 ------
+                {
+                    path: "product/list",
+                    name: "product",
+                    component: () => import("@/views/product/ListView.vue"),
+                },
+                {
+                    path: "product/edit/:productCode",
+                    component: () => import("@/views/product/EditView.vue"),
+                },
+
+                // ------ 供应商 ------
+                {
+                    path: "supplier/list",
+                    name: "supplier",
+                    component: () => import("@/views/supplier/ListView.vue"),
+                },
+                {
+                    path: "supplier/edit/:supplierCode",
+                    component: () => import("@/views/supplier/EditView.vue"),
+                },
+                {
+                    path: "supplier/contact/list/:supplierCode",
+                    component: () => import("@/views/supplier/contact/ListEditView.vue"),
+                },
                 // ------ 询价 ------
                 {
                     path: "inquiry/request/list",

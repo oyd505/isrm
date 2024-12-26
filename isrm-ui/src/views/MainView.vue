@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import {RouterView} from "vue-router";
-import {Content, Icon, Layout, Menu, MenuItem, Sider} from "view-ui-plus";
+import {Content, Icon, Layout, Menu, MenuItem, Sider, Submenu} from "view-ui-plus";
 
 const theme = ref("light");
 const isCollapsed = ref(false);
@@ -15,21 +15,43 @@ const isCollapsed = ref(false);
           <Icon type="ios-paper"/>
           主页
         </MenuItem>
-        <MenuItem name="2" to="/main/inquiry/request/list">
-          <Icon type="ios-people"/>
+        <Submenu name="2">
+          <template #title>
+            <Icon type="ios-paper"/>
+            基础数据
+          </template>
+          <MenuItem name="2-1" to="/main/employee/list">
+            <Icon type="ios-person"/>
+            员工
+          </MenuItem>
+          <MenuItem name="2-2" to="/main/user/list">
+            <Icon type="ios-people"/>
+            用户
+          </MenuItem>
+          <MenuItem name="2-3" to="/main/product/list">
+            <Icon type="ios-cart"/>
+            商品
+          </MenuItem>
+        </Submenu>
+        <MenuItem name="2" to="/main/supplier/list">
+          <Icon type="ios-subway"/>
+          供应商
+        </MenuItem>
+        <MenuItem name="3" to="/main/inquiry/request/list">
+          <Icon type="ios-chatbubbles"/>
           询价
         </MenuItem>
-        <MenuItem name="3" to="/main/inquiry/quote/list/inquiry">
-          <Icon type="ios-people"/>
+        <MenuItem name="4" to="/main/inquiry/quote/list/inquiry">
+          <Icon type="ios-pricetags"/>
           报价
         </MenuItem>
-        <MenuItem name="4" to="/">
-          <Icon type="ios-people"/>
+        <MenuItem name="5" to="/">
+          <Icon type="ios-log-out"/>
           登出
         </MenuItem>
       </Menu>
     </Sider>
-    <Content :style="{margin: '5px', background: '#fff', minHeight: '520px'}">
+    <Content style="background: #fff">
       <RouterView/>
     </Content>
   </Layout>

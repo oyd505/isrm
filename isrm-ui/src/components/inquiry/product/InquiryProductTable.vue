@@ -1,8 +1,9 @@
 <script setup>
-import {Table} from "view-ui-plus"
+import { Table } from "view-ui-plus";
 
+// 定义表格的列配置
 const columns = [
-  {title: "序号", type: "index", width: 80},
+  { title: "序号", type: "index", width: 80 },
   {
     title: "编码",
     key: "code",
@@ -41,17 +42,30 @@ const columns = [
     align: "center",
   },
 ];
-defineProps({
+
+// 定义组件的props
+const { loading, productList } = defineProps({
   loading: Boolean,
-  productList: {type: Object, required: true},
+  productList: { type: Object, required: true },
 });
-defineEmits(["rowClickEvent"]);
+
+// 定义组件的emit事件
+const emit = defineEmits(["rowClickEvent"]);
 </script>
 
 <template>
-  <Table max-height="220" :loading="loading" stripe :columns="columns" :data="productList"
-         @on-row-dblclick="$emit('rowClickEvent', $event)">
+  <!-- 渲染表格组件 -->
+  <Table
+    max-height="220"
+    :loading="loading"
+    stripe
+    :columns="columns"
+    :data="productList"
+    @on-row-dblclick="$emit('rowClickEvent', $event)"
+  >
+    <!-- 定义操作列的模板 -->
     <template #action="{ row, index }">
+      <!-- 插槽用于自定义操作列的内容 -->
       <slot name="tableAction" :row="row" :index="index"></slot>
     </template>
   </Table>

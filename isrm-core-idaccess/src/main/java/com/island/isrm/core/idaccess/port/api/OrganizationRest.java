@@ -8,10 +8,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 组织结构相关的REST接口控制器
+ * 提供不同类型的组织编码和名称列表
+ *
+ * @author dao.ouyang
+ * @since 2024-12-15
+ */
 @RestController
 @RequestMapping("/v1/organization")
 public class OrganizationRest {
 
+    /**
+     * 获取采购组织编码和名称列表
+     *
+     * @return 采购组织编码和名称列表
+     */
     @GetMapping("/list/po/code/name")
     public List<OrganizationCodeAndName> listCodeAndNameForPurchasing() {
         List<OrganizationCodeAndName> data = new ArrayList<>();
@@ -20,6 +32,11 @@ public class OrganizationRest {
         return data;
     }
 
+    /**
+     * 获取公司编码和名称列表
+     *
+     * @return 公司编码和名称列表
+     */
     @GetMapping("/list/co/code/name")
     public List<OrganizationCodeAndName> listCodeAndNameForCompany() {
         List<OrganizationCodeAndName> data = new ArrayList<>();
@@ -28,6 +45,11 @@ public class OrganizationRest {
         return data;
     }
 
+    /**
+     * 获取工厂的组织编码和名称列表
+     *
+     * @return 工厂的组织编码和名称列表
+     */
     @GetMapping("/list/fo/code/name")
     public List<OrganizationCodeAndName> listCodeAndNameForFactory() {
         List<OrganizationCodeAndName> data = new ArrayList<>();

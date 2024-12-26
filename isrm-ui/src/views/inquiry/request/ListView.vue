@@ -7,15 +7,25 @@ import {useRouter} from "vue-router";
 
 const loading = ref(true);
 const requestList = ref([]);
+const pageTotal = ref(0);
+const pageSize = ref(20);
+
+
 onMounted(() => {
-  initInquiryRequestList();
+  initInquiryRequestList(1);
 });
 
-function initInquiryRequestList() {
-  getInquiryRequestList().then((data) => {
-    requestList.value = data;
+function initInquiryRequestList(pageNumber) {
+  getInquiryRequestList(pageNumber, pageSize.value).then((data) => {
+    requestList.value = data.content;
     loading.value = false;
+    pageTotal.value = data.totalElements;
   });
+}
+
+function onPageSizeChange(size) {
+  pageSize.value = size;
+  initInquiryRequestList(1);
 }
 
 const router = useRouter();
@@ -26,7 +36,7 @@ function show(inquiryCode) {
 
 function remove(inquiryCode) {
   delInquiryRequest(inquiryCode).then(() => {
-    initInquiryRequestList();
+    initInquiryRequestList(1);
   });
 }
 </script>
@@ -47,4 +57,6 @@ function remove(inquiryCode) {
       </template>
     </Poptip>
   </InquiryRequestTable>
+  <Page :total="pageTotal" :page-size="pageSize" @on-change="initInquiryRequestList"
+        @on-page-size-change="onPageSizeChange" show-sizer show-total/>
 </template>

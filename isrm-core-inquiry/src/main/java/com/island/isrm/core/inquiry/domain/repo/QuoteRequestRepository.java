@@ -9,7 +9,7 @@ import com.island.isrm.core.inquiry.domain.entity.QuoteRequest;
 import java.util.Optional;
 
 /**
- * 报价申请仓库
+ * 报价申请仓储
  *
  * @author dao.ouyang
  * @since 2024-03-22
@@ -36,7 +36,7 @@ public interface QuoteRequestRepository {
      * 根据询价编号和供应商编号查找待处理的报价申请
      *
      * @param inquiryCode  询价编号
-     * @param supplierCode 供应商代码
+     * @param supplierCode 供应商编码
      * @return 报价申请
      */
     Optional<QuoteRequest> findOnlyPending(InquiryCode inquiryCode, SupplierCode supplierCode);
@@ -45,7 +45,7 @@ public interface QuoteRequestRepository {
      * 根据询价编号和供应商编号查找已提交的报价申请
      *
      * @param inquiryCode  询价编号
-     * @param supplierCode 供应商代码
+     * @param supplierCode 供应商编码
      * @return 报价申请
      */
     Optional<QuoteRequest> findOnlySubmitted(InquiryCode inquiryCode, SupplierCode supplierCode);
