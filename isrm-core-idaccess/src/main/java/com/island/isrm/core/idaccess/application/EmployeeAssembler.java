@@ -9,6 +9,12 @@ import com.island.isrm.core.idaccess.domain.dp.EmployeeContact;
 import com.island.isrm.core.idaccess.domain.dp.JobTitle;
 import com.island.isrm.core.idaccess.domain.entity.Employee;
 
+/**
+ * 员工组装器类，用于将命令对象转换为员工实体对象
+ *
+ * @author dao.ouyang
+ * @since 2024-03-22
+ */
 public class EmployeeAssembler {
 
     // 单例模式，静态实例

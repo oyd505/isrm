@@ -9,7 +9,7 @@ import com.island.isrm.core.inquiry.domain.entity.QuoteRequest;
 import java.util.Optional;
 
 /**
- * 报价申请仓库
+ * 报价申请仓储
  *
  * @author dao.ouyang
  * @since 2024-03-22

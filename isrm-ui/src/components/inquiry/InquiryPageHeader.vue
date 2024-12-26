@@ -1,14 +1,19 @@
+ template
 <script setup>
-
+// 导入 View UI Plus 组件库中的 Description、DescriptionList 和 PageHeader 组件
 import {Description, DescriptionList, PageHeader} from "view-ui-plus";
+// 导入自定义组件 InquiryStatusSelect，用于显示询价状态
 import InquiryStatusSelect from "@/components/inquiry/InquiryStatusSelect.vue";
+// 导入 Vue Router 的 useRouter 函数，用于页面导航
 import {useRouter} from "vue-router";
 
+// 定义组件接收的属性，包括 inquiryCode（询价代码）和 inquiry（询价对象）
 defineProps({
   inquiryCode: {type: String, required: true},
   inquiry: {type: Object, required: true}
 });
 
+// 获取 Vue Router 的 router 实例，用于页面跳转
 const router = useRouter();
 </script>
 

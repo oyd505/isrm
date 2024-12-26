@@ -11,10 +11,25 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * 询价请求转换器接口，用于在实体、数据访问对象和传输对象之间进行映射。
+ *
+ * @author dao.ouyang
+ * @since 2024-12-22
+ */
 @Mapper(componentModel = "Spring")
 public interface InquiryRequestConverter {
+    /**
+     * 获取询价请求转换器实例。
+     */
     InquiryRequestConverter INSTANCE = Mappers.getMapper(InquiryRequestConverter.class);
 
+    /**
+     * 将询价请求实体转换为数据访问对象。
+     *
+     * @param inquiryRequest 询价请求实体。
+     * @return 询价请求数据访问对象。
+     */
     @Mapping(source = "inquiryCode.value", target = "inquiryCode")
     @Mapping(source = "title.value", target = "title")
     @Mapping(source = "reason.value", target = "reason")
@@ -33,6 +48,12 @@ public interface InquiryRequestConverter {
     @Mapping(source = "createdDate.time", target = "createdDate")
     InquiryRequestDO fromEntity(InquiryRequest inquiryRequest);
 
+    /**
+     * 将询价请求数据访问对象转换为实体。
+     *
+     * @param inquiryRequestDO 询价请求数据访问对象。
+     * @return 询价请求实体。
+     */
     @Mapping(target = "inquiryCode.value", source = "inquiryCode")
     @Mapping(target = "title.value", source = "title")
     @Mapping(target = "reason.value", source = "reason")
@@ -51,6 +72,14 @@ public interface InquiryRequestConverter {
     @Mapping(target = "createdDate.time", source = "createdDate")
     InquiryRequest toEntity(InquiryRequestDO inquiryRequestDO);
 
+    /**
+     * 将询价请求数据访问对象、供应商数据访问对象和商品数据访问对象列表转换为传输对象。
+     *
+     * @param inquiryRequestDO  询价请求数据访问对象。
+     * @param inquirySupplierDO 供应商数据访问对象。
+     * @param productDOList     商品数据访问对象列表。
+     * @return 询价供应商商品传输对象。
+     */
     @Mapping(source = "inquiryRequestDO.inquiryCode", target = "inquiryCode")
     @Mapping(source = "inquiryRequestDO.status", target = "status")
     @Mapping(source = "inquirySupplierDO", target = "supplier")

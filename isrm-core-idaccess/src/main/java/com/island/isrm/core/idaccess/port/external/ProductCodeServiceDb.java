@@ -8,6 +8,9 @@ import org.springframework.util.StringUtils;
 
 /**
  * 商品编码服务数据库实现类
+ *
+ * @author dao.ouyang
+ * @since 2024-12-15
  */
 @Service
 public class ProductCodeServiceDb implements ProductCodeService {

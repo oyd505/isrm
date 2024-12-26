@@ -5,7 +5,7 @@ import com.island.isrm.core.supplier.domain.dp.SupplierContactId;
 import com.island.isrm.core.supplier.domain.entity.Supplier;
 
 /**
- * 供应商仓库
+ * 供应商仓储
  *
  * @author dao.ouyang
  * @since 2024-12-15

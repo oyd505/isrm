@@ -6,10 +6,26 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * 用户实体与数据对象相互转换的映射器接口
+ * <p>
+ * 该接口使用MapStruct框架来实现User实体类与UserDO数据传输对象之间的相互转换
+ * MapStruct会自动生成实现类，简化了映射逻辑的编写
+ *
+ * @author dao.ouyang
+ * @since 2024-12-15
+ */
 @Mapper(componentModel = "Spring")
 public interface UserConverter {
+    // MapStruct自动生成的映射器实例，便于在其他地方使用
     UserConverter INSTANCE = Mappers.getMapper(UserConverter.class);
 
+    /**
+     * 将User实体转换为UserDO数据对象
+     *
+     * @param user User实体，包含用户相关信息
+     * @return 转换后的UserDO对象
+     */
     @Mapping(source = "userName.value", target = "userName")
     @Mapping(source = "nickname.value", target = "nickname")
     @Mapping(source = "password.value", target = "password")
@@ -26,6 +42,12 @@ public interface UserConverter {
     @Mapping(source = "createdDate.time", target = "createdDate")
     UserDO fromEntity(User user);
 
+    /**
+     * 将UserDO数据对象转换为User实体
+     *
+     * @param userDO UserDO对象，包含用户相关信息
+     * @return 转换后的User实体
+     */
     @Mapping(target = "userName.value", source = "userName")
     @Mapping(target = "nickname.value", source = "nickname")
     @Mapping(target = "password.value", source = "password")

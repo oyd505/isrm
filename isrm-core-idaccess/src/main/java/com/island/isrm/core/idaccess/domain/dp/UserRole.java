@@ -1,5 +1,11 @@
 package com.island.isrm.core.idaccess.domain.dp;
 
+/**
+ * 用户角色枚举类，定义了系统中的不同用户角色
+ *
+ * @author dao.ouyang
+ * @since 2024-03-22
+ */
 public enum UserRole {
     /**
      * 采购员

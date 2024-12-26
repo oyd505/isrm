@@ -7,7 +7,7 @@ import com.island.isrm.core.inquiry.domain.dp.inquiry.SupplierCode;
 import com.island.isrm.core.inquiry.domain.entity.InquiryRequest;
 
 /**
- * 询价申请仓库
+ * 询价申请仓储
  *
  * @author dao.ouyang
  * @since 2024-03-22

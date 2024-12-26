@@ -7,7 +7,7 @@ import ProductForm from "@/components/product/ProductForm.vue"; // 更新为商�
 
 const route = useRoute();
 const router = useRouter();
-const productCode = ref(route.params.productCode); // 更新为商品代码
+const productCode = ref(route.params.productCode); // 更新为商品编码
 const product = ref({}); // 更新为商品对象
 
 onMounted(() => {
@@ -21,7 +21,7 @@ function initProduct() {
 }
 
 function update() {
-  if (!!product.value.productCode) { // 更新为商品代码
+  if (!!product.value.productCode) { // 更新为商品编码
     updateProduct(product.value).then(data => {
       Message.success("更新成功,商品编码: " + productCode.value); // 更新成功消息
     });
@@ -49,7 +49,7 @@ function update() {
 
 function handleReset() {
   product.value.name = null; // 更新为商品名称
-  product.value.categoryCode = null; // 更新为商品类别代码
+  product.value.categoryCode = null; // 更新为商品类别编码
   product.value.categoryName = null; // 更新为商品类别名称
   product.value.price = null; // 更新为商品价格
   product.value.taxRate = null; // 更新为税率

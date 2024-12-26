@@ -9,13 +9,20 @@ import com.island.isrm.core.idaccess.domain.dp.Category;
 import com.island.isrm.core.idaccess.domain.dp.ProductCode;
 import com.island.isrm.core.idaccess.domain.entity.Product;
 
+/**
+ * 商品组装器类，用于将命令对象转换为商品实体对象
+ *
+ * @author dao.ouyang
+ * @since 2024-03-22
+ */
 public class ProductAssembler {
+    // 单例模式，确保全局只有一个商品组装器实例
     public final static ProductAssembler instance = new ProductAssembler();
 
     /**
      * 将创建商品命令转换为商品实体对象
      *
-     * @param command 创建商品命令对象
+     * @param command     创建商品命令对象
      * @param productCode 商品编码
      * @return 转换后的商品实体对象
      */
@@ -49,4 +56,4 @@ public class ProductAssembler {
         target.setUnit(new Unit(source.getUnitName(), source.getUnitSymbol()));
         target.setCategory(new Category(source.getCategoryCode(), source.getCategoryName()));
     }
-} 
+}

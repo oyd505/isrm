@@ -12,5 +12,8 @@ import java.math.BigDecimal;
  */
 @Data
 public class Amount {
+    /**
+     * 金额的值，使用BigDecimal以精确表示货币金额
+     */
     private final BigDecimal value;
 }

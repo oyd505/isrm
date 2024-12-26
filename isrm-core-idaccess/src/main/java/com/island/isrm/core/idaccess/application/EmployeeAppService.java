@@ -5,6 +5,13 @@ import com.island.isrm.core.idaccess.application.command.UpdateEmployeeCmd;
 import com.island.isrm.core.idaccess.domain.dp.EmployeeCode;
 import org.springframework.validation.annotation.Validated;
 
+/**
+ * 员工应用服务接口
+ * 提供员工相关应用层服务，包括创建、修改和删除员工
+ *
+ * @author dao.ouyang
+ * @since 2024-03-22
+ */
 @Validated
 public interface EmployeeAppService {
 

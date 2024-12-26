@@ -1,7 +1,10 @@
+ template
 <script setup>
+// 导入 Table 组件和报价状态选择组件
 import {Table} from "view-ui-plus";
 import QuoteStatusSelect from "@/components/inquiry/quote/QuoteStatusSelect.vue";
 
+// 定义表格的列配置
 const columns = [
   {title: "序号", type: "index", width: 80},
   {
@@ -27,6 +30,8 @@ const columns = [
     align: "center",
   },
 ];
+
+// 定义组件的 props
 defineProps({
   loading: Boolean,
   requestList: {type: Object, required: true},
