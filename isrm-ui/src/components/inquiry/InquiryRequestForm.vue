@@ -62,13 +62,13 @@ const props = defineProps({
       <Col span="8">
         <!-- 报价开始时间字段 -->
         <FormItem label="报价开始时间">
-          <DatePicker type="datetime" v-model="inquiry.startTime" @on-change="inquiry.startTime = $event"/>
+          <DatePicker type="datetime" :model-value="inquiry.startTime" @on-change="inquiry.startTime = $event"/>
         </FormItem>
       </Col>
       <Col span="8">
         <!-- 报价结束时间字段 -->
         <FormItem label="报价结束时间">
-          <DatePicker type="datetime" v-model="inquiry.endTime" @on-change="inquiry.endTime = $event"/>
+          <DatePicker type="datetime" :model-value="inquiry.endTime" @on-change="inquiry.endTime = $event"/>
         </FormItem>
       </Col>
       <Col span="8">

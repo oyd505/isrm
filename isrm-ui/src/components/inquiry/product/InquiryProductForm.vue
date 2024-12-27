@@ -93,7 +93,7 @@ function handleReset() {
       <Col span="8">
         <!-- 产品交付期表单项 -->
         <FormItem label="交付期">
-          <DatePicker v-model="product.deliveryDate" type="date" @on-change="product.deliveryDate = $event"/>
+          <DatePicker :model-value="product.deliveryDate" type="date" @on-change="product.deliveryDate = $event"/>
         </FormItem>
       </Col>
     </Row>

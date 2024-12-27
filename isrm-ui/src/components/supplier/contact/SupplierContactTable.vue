@@ -39,10 +39,8 @@ defineEmits(["rowClickEvent"]);
 </script>
 
 <template>
-  // 渲染 Table 组件，设置最大高度、加载状态、条纹样式、列配置和数据源
   <Table max-height="220" :loading="loading" stripe :columns="columns" :data="contactList"
          @on-row-dblclick="$emit('rowClickEvent', $event)">
-    // 使用模板插槽自定义操作列的内容
     <template #action="{ row, index }">
       <slot name="tableAction" :row="row" :index="index"></slot>
     </template>
