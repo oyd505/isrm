@@ -1,7 +1,11 @@
+ template
 <script setup>
+// 导入 View UI Plus 组件库中的 Button 和 Result 组件
 import {Button, Result} from "view-ui-plus";
+// 导入用户存储管理器，用于管理用户状态
 import {useUserStore} from "@/stores/user";
 
+// 初始化用户存储管理器实例
 const store = useUserStore();
 </script>
 <template>

@@ -1,9 +1,13 @@
+ template
 <script setup>
+// 导入所需的组件
 import { FormItem, Row, Col, Input, Button } from 'view-ui-plus';
 import ProductUnitSelect from './ProductUnitSelect.vue';
 import ProductCategorySelect from './ProductCategorySelect.vue';
 
+// 定义组件的props
 const props = defineProps({
+    // product属性，类型为Object，必须提供
     product: {type: Object, required: true}
 });
 </script>

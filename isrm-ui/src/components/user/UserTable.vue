@@ -1,8 +1,11 @@
+ template
 <script setup>
+// 导入所需的组件，包括Switch和Table来自view-ui-plus库，以及自定义的UserTypeSelect和UserRoleSelect组件
 import {Switch, Table} from "view-ui-plus";
 import UserTypeSelect from "@/components/user/UserTypeSelect.vue";
 import UserRoleSelect from "@/components/user/UserRoleSelect.vue";
 
+// 定义表格的列配置
 const columns = [
   {title: "序号", type: "index", width: 80},
   {
@@ -44,6 +47,8 @@ const columns = [
     align: "center",
   },
 ];
+
+// 定义组件接收的属性
 defineProps({
   loading: Boolean,
   userList: {type: Object, required: true},

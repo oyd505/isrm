@@ -1,6 +1,8 @@
+ template
 <script setup>
 import { Table } from "view-ui-plus";
 
+// 定义表格的列配置
 const columns = [
   { title: "序号", type: "index", width: 80 },
   {
@@ -36,6 +38,7 @@ const columns = [
   }
 ];
 
+// 定义组件的props
 defineProps({
   productList: Array,
   loading: Boolean
@@ -55,4 +58,4 @@ defineProps({
 
 <style scoped>
 
-</style> 
+</style>
