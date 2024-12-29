@@ -16,6 +16,7 @@
         <module>isrm-core-inquiry</module>
         <module>isrm-web</module>
         <module>isrm-llm</module>
+        <module>isrm-core-order</module>
     </modules>
 
     <properties>
