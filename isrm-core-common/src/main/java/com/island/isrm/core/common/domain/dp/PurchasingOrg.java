@@ -1,4 +1,4 @@
-package com.island.isrm.core.inquiry.domain.dp.inquiry;
+package com.island.isrm.core.common.domain.dp;
 
 import lombok.Data;
 

@@ -1,10 +1,7 @@
 package com.island.isrm.core.inquiry.domain.entity;
 
 import com.island.isrm.core.common.domain.BaseEntity;
-import com.island.isrm.core.common.domain.dp.Currency;
-import com.island.isrm.core.common.domain.dp.LineNumber;
-import com.island.isrm.core.common.domain.dp.Reason;
-import com.island.isrm.core.common.domain.dp.Title;
+import com.island.isrm.core.common.domain.dp.*;
 import com.island.isrm.core.common.exception.BizException;
 import com.island.isrm.core.inquiry.domain.dp.inquiry.*;
 import com.island.isrm.core.inquiry.domain.dp.quote.QuoteCode;

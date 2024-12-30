@@ -1,6 +1,7 @@
 package com.island.isrm.core.inquiry.domain.entity;
 
 import com.island.isrm.core.common.domain.dp.Currency;
+import com.island.isrm.core.common.domain.dp.PurchasingOrg;
 import com.island.isrm.core.common.domain.dp.Reason;
 import com.island.isrm.core.common.domain.dp.Title;
 import com.island.isrm.core.common.exception.BizException;
